@@ -7,8 +7,11 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 ### Comandos
 `./grailsw`
+
 `create-app <nombre>`
+
 `run-app`
+
 `create-domain-class <nombre>`
 
 ### Correr tests
