@@ -7,6 +7,9 @@ class Problema {
     private String rubro
     private Necesitado necesitado
     private String ubicacion
+    private String estado = "stand by"
+    private Laburo laburo = null
+    private Boolean emergencia = false
     private List multimedia = []
     private List cotizaciones = []
 
@@ -15,6 +18,7 @@ class Problema {
         rubro ([blank:false, nullable:false])
         necesitado ([blank:false, nullable:false])
         ubicacion ([blank:false, nullable:false])
+        ubicacion ([blank:true, nullable:false])
         multimedia ([blank:true, nullable:false])
     }
 
@@ -57,4 +61,27 @@ class Problema {
     def agregarMultimedia(String newMultimedia) {
         this.multimedia << newMultimedia
     }
+
+    def esUrgente() {
+        return this.emergencia
+    }
+
+    def aceptarCotizacion(Cotizacion cotizacion, LocalDate fechaDeReunion) {
+        this.estado = "confirmado"
+        this.laburo = new Laburo(horaDeReunion:fechaDeReunion, experto:cotizacion.getExperto())
+    }
+
+    def getLaburo() {
+        return this.laburo
+    }
+
+    def estaConfirmada() {
+        return this.estado == "confirmado"
+    }
+
+    def calificar(Integer calificacion) {
+        laburo.calificar(calificacion)
+    }
+
+
 }

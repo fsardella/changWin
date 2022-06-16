@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="changwin.NecesitadoSpec" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-06-16T21:50:28" hostname="HP-SAR" time="0.343">
+  <properties/>
+  <testcase name="Crear problema" classname="changwin.NecesitadoSpec" time="0.279"/>
+  <testcase name="Eliminar problema" classname="changwin.NecesitadoSpec" time="0.003"/>
+  <testcase name="Crear un problema con emergencia" classname="changwin.NecesitadoSpec" time="0.004"/>
+  <testcase name="Cambiar descripcion de problema" classname="changwin.NecesitadoSpec" time="0.003"/>
+  <testcase name="Subir nueva imagen al problema" classname="changwin.NecesitadoSpec" time="0.002"/>
+  <testcase name="Aceptar una cotizacion" classname="changwin.NecesitadoSpec" time="0.047"/>
+  <testcase name="Calificar un laburo" classname="changwin.NecesitadoSpec" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

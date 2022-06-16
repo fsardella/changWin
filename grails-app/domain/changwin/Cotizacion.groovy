@@ -6,15 +6,14 @@ class Cotizacion {
 
     static constraints = {
         costo ([blank:false, nullable:false])
-        experto ([blank:false, nullable:false])
-        
+        experto ([blank:false, nullable:false])   
     }
 
-    def obtenerCosto() {
-        return precio
+    def getCosto() {
+        return costo
     }
 
-    def obtenerExperto() {
-        return experto.obtenerNombre() // o mas?
+    def getExperto() {
+        return this.experto
     }
 }
