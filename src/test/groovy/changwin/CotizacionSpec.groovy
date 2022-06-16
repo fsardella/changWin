@@ -12,7 +12,5 @@ class CotizacionSpec extends Specification implements DomainUnitTest<Cotizacion>
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
     }
 }

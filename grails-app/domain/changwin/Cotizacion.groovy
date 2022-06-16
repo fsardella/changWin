@@ -5,6 +5,9 @@ class Cotizacion {
     Experto experto
 
     static constraints = {
+        costo ([blank:false, nullable:false])
+        experto ([blank:false, nullable:false])
+        
     }
 
     def obtenerCosto() {

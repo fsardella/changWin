@@ -5,6 +5,7 @@ class Experto {
     List rubros = []
 
     static constraints = {
+        nombre ([blank:false, nullable:false])
     }
 
     def getNombre() {

@@ -12,7 +12,5 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
     }
 }

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="changwin.NecesitadoSpec" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-06-16T04:43:47" hostname="HP-SAR" time="0.3">
-  <properties/>
-  <testcase name="test necesitado" classname="changwin.NecesitadoSpec" time="0.3"/>
-  <system-out><![CDATA[florencia sardella
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

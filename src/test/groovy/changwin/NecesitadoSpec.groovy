@@ -7,15 +7,14 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     private Necesitado necesitado
 
     def setup() {
-        necesitado = new Necesitado(nombre: "Florencia Sardella", metodoDePago: "efectivo")
+        necesitado = new Necesitado(nombre: "Florencia Sardella")
+        experto = new Experto(nombre: "El Juancho")
     }
 
     def cleanup() {
     }
 
-    void "test necesitado"() {
-        expect:"fix me"
-            necesitado.cambiarMetodoDePago("tarjeta de credito")
-            necesitado.obtenerMetodoDePago() == "tarjeta de credito"
+    void "Creacion de Problema"() {
     }
+
 }
