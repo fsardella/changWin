@@ -67,4 +67,21 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
     //             experto.cotizarProblema(problema, costo)
     //         }
     // }
+    // NO ENCONTRAMOS MANERA DE HACER FUNCIONAR EL SHOULDFAIL
+
+    void "Chatear con Necesitado"() {
+        String descripcionDeProblema = "Goteo"
+        String rubroDeProblema =  "plomeria"
+        Necesitado necesitado = new Necesitado(nombre: "Cristo")
+        String ubicacionDeProblema = "CalleFalsa 123"
+        List imagenesDeProblema = ["roto.png", "tuberia.png"]
+        Problema problema = new Problema(descripcion:descripcionDeProblema, rubro:rubroDeProblema,
+                                                necesitado:necesitado, ubicacion:ubicacionDeProblema,
+                                                multimedia:imagenesDeProblema)
+        experto.iniciarChat(problema)
+        experto.chatear(problema, "Hola")
+        expect:
+            experto.seeChat(problema) == problema.seeChat(experto.getNombre())
+            experto.seeChat(problema) == ["El Juancho: Hola"]
+    }
 }

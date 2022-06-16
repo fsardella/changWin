@@ -39,4 +39,16 @@ class Experto {
         problema.cotizar(cotizacion)
         problemasInteractuados << problema
     }
+    
+    def iniciarChat(Problema problema) {
+        problema.iniciarChat(this.nombre)
+    }
+    
+    def chatear(Problema problema, String mensaje) {
+        problema.chatear(this.nombre, this.nombre, mensaje)
+    }
+    
+    def seeChat(Problema problema) {
+        return problema.seeChat(this.nombre)
+    }
 }

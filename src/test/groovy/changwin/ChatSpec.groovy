@@ -12,7 +12,5 @@ class ChatSpec extends Specification implements DomainUnitTest<Chat> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
     }
 }

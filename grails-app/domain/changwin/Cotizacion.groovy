@@ -1,8 +1,9 @@
 package changwin
 
 class Cotizacion {
-    BigDecimal costo
-    Experto experto
+    private BigDecimal costo
+    private Experto experto
+    private Problema problema = null
 
     static constraints = {
         costo ([blank:false, nullable:false])
@@ -16,4 +17,13 @@ class Cotizacion {
     def getExperto() {
         return this.experto
     }
+    
+    def agregarProblema(Problema newProblema) {
+        this.problema = newProblema
+    }
+    
+    def getProblema() {
+        return this.problema
+    }
 }
+

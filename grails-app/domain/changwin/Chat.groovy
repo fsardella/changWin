@@ -9,4 +9,8 @@ class Chat {
     def enviarMensaje(String nombre, String mensaje) {
         mensajes << "${nombre}: ${mensaje}"
     }
+    
+    def getMensajes() {
+        return this.mensajes
+    }
 }

@@ -12,6 +12,7 @@ class Problema {
     private Boolean emergencia = false
     private List multimedia = []
     private List cotizaciones = []
+    private Map chats = [:]
 
     static constraints = {
         descripcion ([blank:false, nullable:false])
@@ -24,6 +25,7 @@ class Problema {
 
     def cotizar(Cotizacion cotizacion) {
         cotizaciones << cotizacion
+        cotizacion.agregarProblema(this)
     }
 
     def getCotizaciones() {
@@ -83,5 +85,25 @@ class Problema {
         laburo.calificar(calificacion)
     }
 
-
+    def iniciarChat(String nombre) {
+        if (this.chats.containsKey(nombre)) {
+            return
+        }
+        Chat chat = new Chat()
+        this.chats.put(nombre, chat)
+    }
+    
+    def chatear(String nombreExperto, String nombre, String mensaje) {
+        if (!this.chats.containsKey(nombreExperto)) {
+            throw new Exception("Chat no existe")
+        }
+        this.chats.get(nombreExperto).enviarMensaje(nombre, mensaje)
+    }
+    
+    def seeChat(String nombreExperto) {
+        if (!this.chats.containsKey(nombreExperto)) {
+            throw new Exception("Chat no existe")
+        }
+        return this.chats.get(nombreExperto).getMensajes()
+    }
 }

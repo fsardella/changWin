@@ -49,4 +49,18 @@ class Necesitado {
         }
         problema.agregarMultimedia(imagen)
     }
+    
+    def iniciarChat(Cotizacion cotizacion) {
+        cotizacion.getExperto().iniciarChat(cotizacion.getProblema());
+    }
+    
+    def chatear(Cotizacion cotizacion, String mensaje) {
+        cotizacion.getProblema().chatear(cotizacion.getExperto().getNombre(),
+                                         this.nombre, mensaje)
+    }
+    
+    def seeChat(Cotizacion cotizacion) {
+        cotizacion.getProblema().seeChat(cotizacion.getExperto().getNombre())
+    }
+    
 }

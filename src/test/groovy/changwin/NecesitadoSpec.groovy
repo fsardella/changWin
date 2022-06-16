@@ -115,4 +115,21 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
         expect:
             laburo.getCalificacion() == 10
     }
+    
+    void "Chatear con Experto"() {
+        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema,
+                                 ubicacionDeProblema, imagenesDeProblema)
+        Problema problema = necesitado.getProblemas().get(0)
+        Experto experto = new Experto(nombre:"Mario")
+        experto.agregarRubro("plomeria")
+        BigDecimal costo = 100000
+        experto.cotizarProblema(problema, costo)
+        Cotizacion cotizacion = problema.getCotizaciones().get(0)
+        
+        necesitado.iniciarChat(cotizacion)
+        necesitado.chatear(cotizacion, "Chau")
+        expect:
+            necesitado.seeChat(cotizacion) == problema.seeChat(experto.getNombre())
+            necesitado.seeChat(cotizacion) == ["Cristo: Chau"]
+    }
 }

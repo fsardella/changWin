@@ -12,7 +12,5 @@ class LaburoSpec extends Specification implements DomainUnitTest<Laburo> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
     }
 }
