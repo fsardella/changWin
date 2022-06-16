@@ -7,7 +7,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     private Necesitado necesitado
 
     def setup() {
-        necesitado = new Necesitado(nombre: "florencia", apellido:"sardella")
+        necesitado = new Necesitado(nombre: "Florencia Sardella", metodoDePago: "efectivo")
     }
 
     def cleanup() {
@@ -15,8 +15,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
 
     void "test necesitado"() {
         expect:"fix me"
-            println "${necesitado.nombre} ${necesitado.apellido}"
-            necesitado.nombreCompleto() == "florencia sardella"
-            // true == false
+            necesitado.cambiarMetodoDePago("tarjeta de credito")
+            necesitado.obtenerMetodoDePago() == "tarjeta de credito"
     }
 }
