@@ -2,18 +2,22 @@ package changwin
 
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
+import java.time.LocalDateTime
 
 class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
     private Problema problema
     private String descripcionDeProblema
-    private String rubroDeProblema
+    private Rubro rubroDeProblema
     private Necesitado necesitadoDeProblema
     private String ubicacionDeProblema
     private List imagenesDeProblema
+    private Experto experto
+    private Certificado certificado
+    private EnteCertificador ente
     
     def setup() {
         descripcionDeProblema = "Goteo"
-        rubroDeProblema =  "plomeria"
+        rubroDeProblema =  new Rubro(nombre: "plomeria")
         necesitadoDeProblema = new Necesitado(nombre: "Cristo")
         ubicacionDeProblema = "CalleFalsa 123"
         imagenesDeProblema = ["roto.png", "tuberia.png"]
@@ -22,6 +26,12 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
                                 necesitado: necesitadoDeProblema,
                                 ubicacion: ubicacionDeProblema,
                                 multimedia: imagenesDeProblema)
+        experto = new Experto(nombre: "Flor")
+        certificado = new Certificado(rubro: rubroDeProblema, numeroMatricula: 123546,
+                                      fechaEmision: LocalDateTime.of(2022, 7, 29, 19, 30, 40),
+                                      fechaVencimiento: LocalDateTime.of(2030, 7, 29, 19, 30, 40),
+                                      experto: experto)
+        ente = new EnteCertificador()
     }
 
     def cleanup() {
@@ -29,18 +39,18 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
 
     void "Problema es creado con todos sus datos necesarios"() {
         expect:
-            problema.getDescripcion() == descripcionDeProblema
-            problema.getRubro() == rubroDeProblema
-            problema.getNecesitado() == necesitadoDeProblema
-            problema.getUbicacion() == ubicacionDeProblema
+            problema.descripcion == descripcionDeProblema
+            problema.rubro == rubroDeProblema
+            problema.necesitado == necesitadoDeProblema
+            problema.ubicacion == ubicacionDeProblema
             problema.getMultimedia() == imagenesDeProblema
     }
     
     void "Problema puede cambiar descripcion"() {
-        String nuevaDesc = "Goteo ocacionado por traumatismo en tuberia"
+        String nuevaDesc = "Goteo ocasionado por traumatismo en tuberia"
         problema.cambiarDescripcion(nuevaDesc)
         expect:
-            problema.getDescripcion() == nuevaDesc
+            problema.descripcion == nuevaDesc
     }
     
     void "Problema puede agregar una nueva imagen"() {
@@ -53,12 +63,10 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
     }
     
     void "Problema puede agregar una cotizacion"() {
-        Experto tipoExperto = new Experto(nombre: "Hola")
-        tipoExperto.agregarRubro(rubroDeProblema)
-        Cotizacion cotizacion = new Cotizacion(costo: 500, experto: tipoExperto)
+        experto.agregarRubro(certificado, ente)
+        Cotizacion cotizacion = new Cotizacion(costo: 500, experto: experto)
         problema.agregarCotizacion(cotizacion)
         expect:
             problema.getCotizaciones().contains(cotizacion)
     }
-    
 }

@@ -3,7 +3,7 @@ package changwin
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class LaburoSpec extends Specification implements DomainUnitTest<Laburo> {
+class EnteCertificadorSpec extends Specification implements DomainUnitTest<EnteCertificador> {
 
     def setup() {
     }

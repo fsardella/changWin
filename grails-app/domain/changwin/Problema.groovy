@@ -1,59 +1,50 @@
 package changwin
 
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 class Problema {
-    private String descripcion
-    private String rubro
-    private Necesitado necesitado
-    private String ubicacion
-    private String estado = "stand by"
-    private Laburo laburo = null
-    private Boolean emergencia = false
-    private List multimedia = []
-    private List cotizaciones = []
-    private Map chats = [:]
+    String descripcion
+    Rubro rubro
+    Necesitado necesitado
+    String ubicacion
+    Boolean emergencia = false
+    private EstadoProblema estado = EstadoProblema.EN_ESPERA
+    private List<String> multimedia = []
+    private List<Cotizacion> cotizaciones = []
 
-    static constraints = {
-        descripcion ([blank:false, nullable:false])
-        rubro ([blank:false, nullable:false])
-        necesitado ([blank:false, nullable:false])
-        ubicacion ([blank:false, nullable:false])
-        ubicacion ([blank:true, nullable:false])
-        multimedia ([blank:true, nullable:false])
+    public enum EstadoProblema {
+        EN_ESPERA,
+        CONFIRMADO
     }
 
-    def cotizar(Cotizacion cotizacion) {
-        cotizaciones << cotizacion
-        cotizacion.agregarProblema(this)
+    static constraints = {
+        descripcion blank: false, nullable: false
+        rubro blank: false, nullable: false
+        necesitado blank: false, nullable: false
+        ubicacion blank: false, nullable: false
     }
 
     def getCotizaciones() {
-        return this.cotizaciones.clone() // esto esta ok?
+        return this.cotizaciones.clone()
+    }
+
+    def getCotizacionAceptada() {
+        List aceptadas = cotizaciones.findAll{cot -> cot.estaConfirmada()}
+        if (aceptadas.size() != 1) {
+            throw new Exception("No hay una cotizacion confirmada, o hay mas de una")
+        }
+        return aceptadas.get(0)
     }
     
-    def agregarCotizacion(Cotizacion newCotizacion) {
-        this.cotizaciones << newCotizacion
-    }
-    
-    def getDescripcion() {
-        return this.descripcion
+    def agregarCotizacion(Cotizacion cotizacion) {
+        this.cotizaciones << cotizacion
     }
     
     def cambiarDescripcion(String newDesc) {
+        if (!this.cotizaciones.isEmpty()) {
+            throw new Exception("Esta problema ya fue cotizado")
+        }
         this.descripcion = newDesc
-    }
-    
-    def getRubro() {
-        return this.rubro    
-    }
-    
-    def getNecesitado() {
-        return this.necesitado    
-    }
-    
-    def getUbicacion() {
-        return this.ubicacion
     }
     
     def getMultimedia() {
@@ -68,42 +59,35 @@ class Problema {
         return this.emergencia
     }
 
-    def aceptarCotizacion(Cotizacion cotizacion, LocalDate fechaDeReunion) {
-        this.estado = "confirmado"
-        this.laburo = new Laburo(horaDeReunion:fechaDeReunion, experto:cotizacion.getExperto())
+    def aceptarCotizacion(Cotizacion cotizacion, LocalDateTime fechaDeReunion) {
+        if (this.estaConfirmado()) {
+            throw new Exception("Una cotizacion ya fue aceptada")
+        }
+        this.estado = EstadoProblema.CONFIRMADO
+        cotizacion.aceptar(fechaDeReunion)
     }
-
-    def getLaburo() {
-        return this.laburo
-    }
-
-    def estaConfirmada() {
-        return this.estado == "confirmado"
-    }
-
+    
     def calificar(Integer calificacion) {
-        laburo.calificar(calificacion)
+        getCotizacionAceptada().calificar(calificacion)
     }
 
-    def iniciarChat(String nombre) {
-        if (this.chats.containsKey(nombre)) {
+    def estaConfirmado() {
+        return this.estado == EstadoProblema.CONFIRMADO
+    }
+
+    def getCalificacion() {
+        return getCotizacionAceptada().getCalificacion()
+    }
+
+    def eliminarCotizacion(Cotizacion cotizacion) {
+        if (!this.cotizaciones.contains(cotizacion)) {
             return
         }
-        Chat chat = new Chat()
-        this.chats.put(nombre, chat)
+        this.cotizaciones.removeElement(cotizacion)
+        cotizacion.eliminar()
     }
-    
-    def chatear(String nombreExperto, String nombre, String mensaje) {
-        if (!this.chats.containsKey(nombreExperto)) {
-            throw new Exception("Chat no existe")
-        }
-        this.chats.get(nombreExperto).enviarMensaje(nombre, mensaje)
-    }
-    
-    def seeChat(String nombreExperto) {
-        if (!this.chats.containsKey(nombreExperto)) {
-            throw new Exception("Chat no existe")
-        }
-        return this.chats.get(nombreExperto).getMensajes()
+
+    def eliminar() {
+        this.cotizaciones.clone().forEach{cot -> cot.eliminar()}
     }
 }

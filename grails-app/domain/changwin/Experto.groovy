@@ -1,54 +1,60 @@
 package changwin
 
-class Experto {
-    String nombre
-    List rubros = []
-    List problemasInteractuados = []
+class Experto extends Usuario {
+    private List<Certificado> certificados = []
+    private List<Cotizacion> cotizaciones = []
 
     static constraints = {
-        nombre ([blank:false, nullable:false])
+        nombre blank: false, nullable: false
     }
 
-    def getNombre() {
-        return this.nombre
+    def obtenerCertificados() {
+        return this.certificados.clone()
     }
 
-    def getRubros() {
-        return this.rubros.clone()
+    def obtenerCotizaciones() {
+        return this.cotizaciones.clone()
     }
 
-    def getProblemasInteractuados() {
-        return this.problemasInteractuados.clone()
+    def agregarRubro(Certificado certificado, EnteCertificador enteCertificador) {
+        this.certificados << certificado
+        enteCertificador.validarCertificado(certificado)
     }
 
-    def agregarRubro(String nuevoRubro) {
-        this.rubros << nuevoRubro
+    def actualizarCertificado(Certificado certificado) {
+        List eliminables = this.certificados.findAll{cert -> cert.rubro == certificado.rubro
+                                                             && cert != certificado}
+        this.certificados.removeAll{cert -> eliminables.contains(cert)}
     }
 
-    def eliminarRubro(String rubroAEliminar) {
-        if (this.rubros.contains(rubroAEliminar)) {
-            this.rubros.removeElement(rubroAEliminar)
+    def eliminarRubro(Certificado certificado) {
+        if (!this.certificados.contains(certificado)) {
+            return
         }
+        this.certificados.removeElement(certificado)
+
+        List eliminables = this.cotizaciones.findAll{cot -> cot.getRubro() == certificado.rubro
+                                                            && !cot.estaConfirmada()}
+        eliminables.forEach{elim -> this.eliminarCotizacion(elim)}
+    }
+
+    def eliminarCotizacion(Cotizacion cotizacion) {
+        if (!this.cotizaciones.contains(cotizacion)) {
+            return
+        }
+        this.cotizaciones.removeElement(cotizacion)
+        cotizacion.eliminar()
     }
 
     def cotizarProblema(Problema problema, BigDecimal costo) {
-        if (!this.rubros.contains(problema.getRubro())) {
+        if (!this.certificados.any{cert -> problema.rubro == cert.rubro && cert.esValido()}) {
             throw new Exception("Acceso con rubro ilegal")
         }
-        Cotizacion cotizacion = new Cotizacion(costo:costo, experto:this)
-        problema.cotizar(cotizacion)
-        problemasInteractuados << problema
-    }
-    
-    def iniciarChat(Problema problema) {
-        problema.iniciarChat(this.nombre)
-    }
-    
-    def chatear(Problema problema, String mensaje) {
-        problema.chatear(this.nombre, this.nombre, mensaje)
-    }
-    
-    def seeChat(Problema problema) {
-        return problema.seeChat(this.nombre)
+        if (problema.estaConfirmado()) {
+            throw new Exception("El problema ya fue confirmado")
+        }
+        Cotizacion cotizacion = new Cotizacion(costo: new Dinero(monto:costo), experto: this, problema: problema)
+        problema.agregarCotizacion(cotizacion)
+        cotizaciones << cotizacion
     }
 }

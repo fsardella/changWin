@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="changwin.NecesitadoSpec" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-06-16T22:42:53" hostname="Belladonna" time="1.026">
+<testsuite name="changwin.NecesitadoSpec" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-08-02T04:17:17" hostname="HP-SAR" time="0.085">
   <properties/>
-  <testcase name="Crear problema" classname="changwin.NecesitadoSpec" time="0.81"/>
-  <testcase name="Eliminar problema" classname="changwin.NecesitadoSpec" time="0.009"/>
-  <testcase name="Crear un problema con emergencia" classname="changwin.NecesitadoSpec" time="0.01"/>
-  <testcase name="Cambiar descripcion de problema" classname="changwin.NecesitadoSpec" time="0.009"/>
-  <testcase name="Subir nueva imagen al problema" classname="changwin.NecesitadoSpec" time="0.008"/>
-  <testcase name="Aceptar una cotizacion" classname="changwin.NecesitadoSpec" time="0.116"/>
-  <testcase name="Calificar un laburo" classname="changwin.NecesitadoSpec" time="0.015"/>
-  <testcase name="Chatear con Experto" classname="changwin.NecesitadoSpec" time="0.037"/>
+  <testcase name="Crear problema" classname="changwin.NecesitadoSpec" time="0.014"/>
+  <testcase name="Eliminar problema" classname="changwin.NecesitadoSpec" time="0.005"/>
+  <testcase name="Eliminar problema elimina sus cotizaciones" classname="changwin.NecesitadoSpec" time="0.006"/>
+  <testcase name="No se puede eliminar un problema que fue confirmado" classname="changwin.NecesitadoSpec" time="0.006"/>
+  <testcase name="Crear un problema con emergencia" classname="changwin.NecesitadoSpec" time="0.004"/>
+  <testcase name="Cambiar descripcion de problema" classname="changwin.NecesitadoSpec" time="0.003"/>
+  <testcase name="Un problema cotizado no puede cambiar su descripción" classname="changwin.NecesitadoSpec" time="0.004"/>
+  <testcase name="Subir nueva imagen al problema" classname="changwin.NecesitadoSpec" time="0.003"/>
+  <testcase name="Un problema no confirmado no puede ser calificado" classname="changwin.NecesitadoSpec" time="0.006"/>
+  <testcase name="Aceptar una cotizacion" classname="changwin.NecesitadoSpec" time="0.004"/>
+  <testcase name="No se pueden aceptar dos cotizaciones distintas" classname="changwin.NecesitadoSpec" time="0.006"/>
+  <testcase name="Calificar un problema confirmado" classname="changwin.NecesitadoSpec" time="0.01"/>
+  <testcase name="No se pueden calificar problemas fuera del limite temporal" classname="changwin.NecesitadoSpec" time="0.006"/>
+  <testcase name="Chatear con Experto" classname="changwin.NecesitadoSpec" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

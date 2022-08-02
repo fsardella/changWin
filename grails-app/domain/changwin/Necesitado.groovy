@@ -1,19 +1,21 @@
 package changwin
 
-class Necesitado {
-    private String nombre
-    List problemas = []
+import java.time.LocalDateTime
+
+class Necesitado extends Usuario {
+    MetodoDePago metodoDePago
+    private List<Problema> problemas = []
+
+    public enum MetodoDePago {
+        EFECTIVO,
+        CREDITO,
+        DEBITO,
+        TRANSFERENCIA
+    }
 
     static constraints = {
-        nombre ([blank:false, nullable:false])
-    }
-
-    def cambiarNombre(String nombre) {
-        this.nombre = nombre
-    }
-
-    def obtenerNombre() {
-        return this.nombre
+        nombre blank: false, nullable: false
+        metodoDePago blank: false, nullable: false
     }
 
     def obtenerProblemas() {
@@ -21,7 +23,7 @@ class Necesitado {
     }
 
     def crearProblema(String descripcion,
-                    String rubro,
+                    Rubro rubro,
                     String ubicacion,
                     List multimedia = [],
                     Boolean emergencia = false) {
@@ -31,9 +33,21 @@ class Necesitado {
     }
 
     def eliminarProblema(Problema problema) {
-        if (this.problemas.contains(problema)) {
-            this.problemas.removeElement(problema)
+        if (!this.problemas.contains(problema)) {
+            throw new Exception("El problema no se encuentra")
         }
+        if (problema.estaConfirmado()) {
+            throw new Exception("No se puede eliminar un problema confirmado")
+        }
+        this.problemas.removeElement(problema)
+        problema.eliminar()
+    }
+
+    def aceptarCotizacion(Problema problema, Cotizacion cotizacion, LocalDateTime horaDeReunion) {
+        if (!this.problemas.contains(problema)) {
+            throw new Exception("El problema no se encuentra")
+        }
+        problema.aceptarCotizacion(cotizacion, horaDeReunion)
     }
 
     def cambiarDescripcionProblema(Problema problema, String descripcionNueva) {
@@ -49,18 +63,11 @@ class Necesitado {
         }
         problema.agregarMultimedia(imagen)
     }
-    
-    def iniciarChat(Cotizacion cotizacion) {
-        cotizacion.getExperto().iniciarChat(cotizacion.getProblema());
+
+    def calificar(Problema problema, Integer calificacion) {
+        if (!this.problemas.contains(problema)) {
+            throw new Exception("Acceso ilegal a problema")
+        }
+        problema.calificar(calificacion)
     }
-    
-    def chatear(Cotizacion cotizacion, String mensaje) {
-        cotizacion.getProblema().chatear(cotizacion.getExperto().getNombre(),
-                                         this.nombre, mensaje)
-    }
-    
-    def seeChat(Cotizacion cotizacion) {
-        cotizacion.getProblema().seeChat(cotizacion.getExperto().getNombre())
-    }
-    
 }

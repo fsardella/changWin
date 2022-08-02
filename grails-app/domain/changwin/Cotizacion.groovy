@@ -1,29 +1,71 @@
 package changwin
 
+import java.time.Duration
+import java.time.LocalDateTime
+
 class Cotizacion {
-    private BigDecimal costo
-    private Experto experto
-    private Problema problema = null
+    Dinero costo
+    Experto experto
+    Problema problema
+    EstadoCotizacion estado = EstadoCotizacion.EN_ESPERA
+    private LocalDateTime horaDeReunion
+    private Integer calificacion = null
+    private Chat chat = new Chat(cotizacion: this)
+
+    public enum EstadoCotizacion {
+        EN_ESPERA,
+        CONFIRMADA
+    }
 
     static constraints = {
-        costo ([blank:false, nullable:false])
-        experto ([blank:false, nullable:false])   
+        costo blank: false, nullable: false
+        experto blank: false, nullable: false
+        problema blank: false, nullable: false
     }
 
-    def getCosto() {
-        return costo
+    def aceptar(LocalDateTime horaReunion) {
+        this.horaDeReunion = horaReunion
+        this.estado = EstadoCotizacion.CONFIRMADA
     }
 
-    def getExperto() {
-        return this.experto
+    def calificar(Integer calificacion) {
+        LocalDateTime horaActual = LocalDateTime.now()
+        Duration duration = Duration.between(this.horaDeReunion, horaActual)
+        if (this.estaCalificada() || duration.toDays() > 30 || this.horaDeReunion.isAfter(horaActual)) {
+            throw new Exception("No es posible calificar")
+        }
+        this.calificacion = calificacion
     }
     
-    def agregarProblema(Problema newProblema) {
-        this.problema = newProblema
+    def getCalificacion() {
+        if (!this.estaCalificada()) {
+            throw new Exception("No ha sido calificada")
+        }
+        return this.calificacion
     }
-    
-    def getProblema() {
-        return this.problema
+
+    def recibirMensaje(Mensaje mensaje) {
+        chat.recibirMensaje(mensaje)
+    }
+
+    def mostrarChat() {
+        chat.mostrarChat()
+    }
+
+    def estaConfirmada() {
+        return this.estado == EstadoCotizacion.CONFIRMADA
+    }
+
+    def estaCalificada() {
+        return this.calificacion != null
+    }
+
+    def eliminar() {
+        problema.eliminarCotizacion(this)
+        experto.eliminarCotizacion(this)
+    }
+
+    def getRubro() {
+        return this.problema.rubro
     }
 }
-

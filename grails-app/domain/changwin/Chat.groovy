@@ -1,16 +1,18 @@
 package changwin
 
 class Chat {
-    List mensajes = []
+    Cotizacion cotizacion
+    List<Mensaje> mensajes = []
 
     static constraints = {
+        cotizacion blank: false, nullable: false
     }
 
-    def enviarMensaje(String nombre, String mensaje) {
-        mensajes << "${nombre}: ${mensaje}"
+    def recibirMensaje(Mensaje mensaje) {
+        mensajes << mensaje
     }
     
-    def getMensajes() {
-        return this.mensajes
+    def mostrarChat() {
+        return this.mensajes.collect{mens -> mens.mostrarMensaje()}
     }
 }
