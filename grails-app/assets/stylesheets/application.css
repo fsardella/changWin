@@ -13,3 +13,25 @@
 *= require mobile
 *= require_self
 */
+
+.role-selector {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70.6%;
+}
+
+.role-selector button {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    height: 75px;
+    width: 200px;
+    /* background: #878db1; */
+    border-radius: 7%;
+    margin: 30px 125px;
+    border: none;
+    cursor: pointer;
+}
+
+.role-selector button:hover{
+  opacity: 0.9;
+}

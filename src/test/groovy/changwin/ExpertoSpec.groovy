@@ -63,7 +63,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Cotizar un problema"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123")
+        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         Problema problema = necesitado.obtenerProblemas().get(0)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000
@@ -74,7 +74,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Cotizar un problema con rubro invalido"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123")
+        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 10000
         Rubro rubroIncorrecto =  new Rubro(nombre: "payaso")
@@ -90,7 +90,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Cotizar un problema con certificado vencido"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123")
+        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 10000
         Certificado certificadoIncorrecto = new Certificado(rubro: rubro, numeroMatricula: 456789,
@@ -105,7 +105,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "No se puede cotizar un problema ya confirmado"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123")
+        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         Problema problema = necesitado.obtenerProblemas().get(0)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000
@@ -119,7 +119,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Chatear con Necesitado"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123")
+        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         Problema problema = necesitado.obtenerProblemas().get(0)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000

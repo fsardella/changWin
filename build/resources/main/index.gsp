@@ -45,30 +45,44 @@
 
 <div class="svg" role="presentation">
     <div class="grails-logo-container">
-        <asset:image src="grails-cupsonly-logo-white.svg" class="grails-logo"/>
+        <%-- <asset:image src="plomero.jpeg" class="grails-logo"/> --%>
     </div>
 </div>
 
 <div id="content" role="main">
     <div class="container">
         <section class="row colset-2-its">
-            <h1>Welcome to Grails</h1>
+            <h1>Bienvenido/a a Chang-win</h1>
 
             <p>
-                Congratulations, you have successfully started your first Grails application! At the moment
-                this is the default page, feel free to modify it to either redirect to a controller or display
-                whatever content you may choose. Below is a list of controllers that are currently deployed in
-                this application, click on each to execute its default action:
+                Conseguir un electricista, plomero o realmente cualquier experto de confianza es 
+                un problema muy común y difícil de resolver en la vida del ser humano moderno, con 
+                tanta escasez de tiempo. Más aún si se considera que debe estar disponible en las franjas 
+                horarias donde podemos recibirlo; y que, aún teniendo certificaciones verificables, no 
+                existe información centralizada sobre la eficiencia con la que realizará su labor.
+            </p>
+            <p>
+                Chang-win es una alternativa al boca-boca al cual estamos acostumbrados para la resolución 
+                de dichos “laburos” en diferentes rubros (como pueden ser la plomería, electricidad o limpieza). 
+                Es un servicio que se encarga de llevar la eficiencia del mundo moderno a las problemáticas 
+                típicas que pueden surgir por defectos cotidianos en busca de arreglo.
+
             </p>
 
             <div id="controllers" role="navigation">
                 <h2>Available Controllers:</h2>
                 <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
+                    <%-- <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
                         <li class="controller">
                             <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
                         </li>
-                    </g:each>
+                    </g:each> --%>
+                    <div class="role-selector">
+                        <button type="button">Registrarse como necesitado</button>
+                        <button type="button">Loguearse como necesitado</button>
+                        <button type="button">Registrarse como experto</button>
+                        <button type="button">Loguearse como experto</button>
+                    </div>
                 </ul>
             </div>
         </section>

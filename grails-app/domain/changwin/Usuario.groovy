@@ -2,9 +2,13 @@ package changwin
 
 abstract class Usuario {
     String nombre
+    String mail
+    String contrasenia
 
     static constraints = {
-        nombre blank: false, nullable: false
+        nombre blank: false, nullable: false, unique: true
+        mail email: true, blank: false, nullable: false
+        contrasenia blank: false, nullable: false
     }
 
     def chatear(Cotizacion cotizacion, Mensaje mensaje) {

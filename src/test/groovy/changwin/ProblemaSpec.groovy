@@ -10,6 +10,7 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
     private Rubro rubroDeProblema
     private Necesitado necesitadoDeProblema
     private String ubicacionDeProblema
+    private BarrioProblema barrioDeProblema
     private List imagenesDeProblema
     private Experto experto
     private Certificado certificado
@@ -20,11 +21,13 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
         rubroDeProblema =  new Rubro(nombre: "plomeria")
         necesitadoDeProblema = new Necesitado(nombre: "Cristo")
         ubicacionDeProblema = "CalleFalsa 123"
+        barrioDeProblema = BarrioProblema.PALERMO
         imagenesDeProblema = ["roto.png", "tuberia.png"]
         problema = new Problema(descripcion: descripcionDeProblema,
                                 rubro: rubroDeProblema,
                                 necesitado: necesitadoDeProblema,
                                 ubicacion: ubicacionDeProblema,
+                                barrio: barrioDeProblema,
                                 multimedia: imagenesDeProblema)
         experto = new Experto(nombre: "Flor")
         certificado = new Certificado(rubro: rubroDeProblema, numeroMatricula: 123546,
@@ -43,6 +46,7 @@ class ProblemaSpec extends Specification implements DomainUnitTest<Problema> {
             problema.rubro == rubroDeProblema
             problema.necesitado == necesitadoDeProblema
             problema.ubicacion == ubicacionDeProblema
+            problema.barrio == barrioDeProblema
             problema.getMultimedia() == imagenesDeProblema
     }
     

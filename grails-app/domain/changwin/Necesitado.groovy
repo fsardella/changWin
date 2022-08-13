@@ -15,7 +15,6 @@ class Necesitado extends Usuario {
 
     static constraints = {
         nombre blank: false, nullable: false
-        metodoDePago blank: false, nullable: false
     }
 
     def obtenerProblemas() {
@@ -25,11 +24,12 @@ class Necesitado extends Usuario {
     def crearProblema(String descripcion,
                     Rubro rubro,
                     String ubicacion,
+                    BarrioProblema barrio,
                     List multimedia = [],
                     Boolean emergencia = false) {
         problemas << new Problema(descripcion:descripcion, rubro:rubro,
                                 necesitado:this, emergencia:emergencia, ubicacion:ubicacion,
-                                multimedia:multimedia)
+                                barrio:barrio, multimedia:multimedia)
     }
 
     def eliminarProblema(Problema problema) {

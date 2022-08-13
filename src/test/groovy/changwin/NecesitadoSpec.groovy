@@ -10,6 +10,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     private Rubro rubroDeProblema
     private Necesitado necesitado
     private String ubicacionDeProblema
+    private BarrioProblema barrioDeProblema
     private List imagenesDeProblema
     private Experto experto
     private Certificado certificado
@@ -20,6 +21,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
         rubroDeProblema =  new Rubro(nombre: "plomeria")
         necesitado = new Necesitado(nombre: "Cristo")
         ubicacionDeProblema = "CalleFalsa 123"
+        barrioDeProblema = BarrioProblema.PALERMO
         imagenesDeProblema = ["roto.png", "tuberia.png"]
         experto = new Experto(nombre: "Mario")
         certificado = new Certificado(rubro: rubroDeProblema, numeroMatricula: 123546,
@@ -36,8 +38,10 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Crear problema"() {
         Problema problemaEsperado = new Problema(descripcion:descripcionDeProblema, rubro:rubroDeProblema,
                                                 necesitado:necesitado, ubicacion:ubicacionDeProblema,
+                                                barrio: barrioDeProblema,
                                                 multimedia:imagenesDeProblema)
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema, imagenesDeProblema)
+        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
+                                 barrioDeProblema, imagenesDeProblema)
         expect:
             necesitado.obtenerProblemas().size() == 1
             Problema problemaObtenido = necesitado.obtenerProblemas().get(0)
@@ -45,11 +49,13 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
             problemaObtenido.rubro == problemaEsperado.rubro
             problemaObtenido.necesitado == problemaEsperado.necesitado
             problemaObtenido.ubicacion == problemaEsperado.ubicacion
+            problemaObtenido.barrio == problemaEsperado.barrio
             problemaObtenido.getMultimedia() == problemaEsperado.getMultimedia()
     }
 
     void "Eliminar problema"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema, imagenesDeProblema)
+        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
+                                 barrioDeProblema, imagenesDeProblema)
         Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
         necesitado.eliminarProblema(problemaAEliminar)
         expect:
@@ -57,7 +63,8 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "Eliminar problema elimina sus cotizaciones"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema, imagenesDeProblema)
+        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
+                                 barrioDeProblema, imagenesDeProblema)
         Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
 
         experto.cotizarProblema(problemaAEliminar, 10000)
@@ -72,7 +79,8 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "No se puede eliminar un problema que fue confirmado"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema, imagenesDeProblema)
+        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
+                                 barrioDeProblema, imagenesDeProblema)
         Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
 
         experto.cotizarProblema(problemaAEliminar, 10000)
@@ -86,10 +94,12 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Crear un problema con emergencia"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema, 
                                 true)
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         expect:
             necesitado.obtenerProblemas().get(0).esUrgente()
@@ -99,6 +109,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Cambiar descripcion de problema"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         necesitado.cambiarDescripcionProblema(problema, "Goteo de tuberia")
@@ -109,6 +120,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Un problema cotizado no puede cambiar su descripción"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         experto.cotizarProblema(problema, 10000)
@@ -119,6 +131,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Subir nueva imagen al problema"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         necesitado.agregarImagenProblema(problema, "imagen.png")
@@ -129,6 +142,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Un problema no confirmado no puede ser calificado"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         expect:
@@ -138,6 +152,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Aceptar una cotizacion"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 100000
@@ -153,6 +168,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "No se pueden aceptar dos cotizaciones distintas"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         experto.cotizarProblema(problema, 100000)
@@ -168,6 +184,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "Calificar un problema confirmado"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 100000
@@ -184,9 +201,11 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     void "No se pueden calificar problemas fuera del limite temporal"() {
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
+                                barrioDeProblema,
                                 imagenesDeProblema)
         Problema problema1 = necesitado.obtenerProblemas().get(0)
         Problema problema2 = necesitado.obtenerProblemas().get(1)
@@ -205,7 +224,8 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     
     void "Chatear con Experto"() {
         necesitado.crearProblema(descripcionDeProblema, rubroDeProblema,
-                                 ubicacionDeProblema, imagenesDeProblema)
+                                 ubicacionDeProblema, barrioDeProblema,
+                                 imagenesDeProblema)
         Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 100000
         experto.cotizarProblema(problema, costo)

@@ -1,6 +1,6 @@
-#Mon, 01 Aug 2022 17:16:36 -0300
+#Sat, 13 Aug 2022 11:51:20 -0300
 
 info.app.version=0.1
 info.app.name=changWin
-grails.env=test
+grails.env=development
 info.app.grailsVersion=5.1.8

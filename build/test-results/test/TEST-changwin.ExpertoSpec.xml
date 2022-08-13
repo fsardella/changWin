@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="changwin.ExpertoSpec" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-08-02T04:17:16" hostname="HP-SAR" time="0.412">
+<testsuite name="changwin.ExpertoSpec" tests="7" skipped="0" failures="0" errors="0" timestamp="2022-08-13T14:50:22" hostname="HP-SAR" time="0.437">
   <properties/>
-  <testcase name="Agregado de rubro" classname="changwin.ExpertoSpec" time="0.303"/>
+  <testcase name="Agregado de rubro" classname="changwin.ExpertoSpec" time="0.314"/>
   <testcase name="Eliminado de rubro" classname="changwin.ExpertoSpec" time="0.01"/>
-  <testcase name="Cotizar un problema" classname="changwin.ExpertoSpec" time="0.058"/>
-  <testcase name="Cotizar un problema con rubro invalido" classname="changwin.ExpertoSpec" time="0.011"/>
+  <testcase name="Cotizar un problema" classname="changwin.ExpertoSpec" time="0.067"/>
+  <testcase name="Cotizar un problema con rubro invalido" classname="changwin.ExpertoSpec" time="0.014"/>
   <testcase name="Cotizar un problema con certificado vencido" classname="changwin.ExpertoSpec" time="0.006"/>
   <testcase name="No se puede cotizar un problema ya confirmado" classname="changwin.ExpertoSpec" time="0.007"/>
-  <testcase name="Chatear con Necesitado" classname="changwin.ExpertoSpec" time="0.016"/>
+  <testcase name="Chatear con Necesitado" classname="changwin.ExpertoSpec" time="0.015"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

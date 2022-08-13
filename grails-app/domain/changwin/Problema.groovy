@@ -2,11 +2,18 @@ package changwin
 
 import java.time.LocalDateTime
 
+public enum BarrioProblema {
+    PALERMO,
+    SAN_TELMO,
+    RECOLETA
+}
+
 class Problema {
     String descripcion
     Rubro rubro
     Necesitado necesitado
     String ubicacion
+    BarrioProblema barrio
     Boolean emergencia = false
     private EstadoProblema estado = EstadoProblema.EN_ESPERA
     private List<String> multimedia = []
@@ -22,6 +29,7 @@ class Problema {
         rubro blank: false, nullable: false
         necesitado blank: false, nullable: false
         ubicacion blank: false, nullable: false
+        barrio blank: false, nullable: false
     }
 
     def getCotizaciones() {
