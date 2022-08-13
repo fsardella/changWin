@@ -25,7 +25,6 @@
     color: rgb(255, 255, 255);
     height: 75px;
     width: 200px;
-    /* background: #878db1; */
     border-radius: 7%;
     margin: 30px 125px;
     border: none;
@@ -33,5 +32,9 @@
 }
 
 .role-selector button:hover{
-  opacity: 0.9;
+  opacity: 0.8;
+}
+
+.role-selector button:active{
+  opacity: 1.2;
 }

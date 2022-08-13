@@ -8,7 +8,7 @@ abstract class Usuario {
     static constraints = {
         nombre blank: false, nullable: false, unique: true
         mail email: true, blank: false, nullable: false
-        contrasenia blank: false, nullable: false
+        contrasenia password: true, blank: false, nullable: false
     }
 
     def chatear(Cotizacion cotizacion, Mensaje mensaje) {
