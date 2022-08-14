@@ -26,8 +26,8 @@
             <ul class="nav navbar-nav ml-auto">
                 <g:pageProperty name="page.nav"/>
             </ul>
-            <g:if test="${application.nombreUsuario != null}">
-                <p id= "nombreUsuario" style="font-size:20px; color:lightgray">${application.nombreUsuario}</p>
+            <g:if test="${application.usuarioActual != null && application.usuarioActual.nombre != null}">
+                <p id= "nombreUsuario" style="font-size:20px; color:lightgray">Hola ${application.usuarioActual.nombre}!</p>
             </g:if>
             <g:else>
                 <p id= "nombreUsuario" style="font-size:20px; color:lightgray">No ha iniciado sesión</p>

@@ -31,6 +31,11 @@
                             <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </fieldset>
                     </g:form>
+                    <fieldset class="buttons">
+                        <button onclick="location.href='../../necesitado/mostrarProblemasDeNecesitado/${this.necesitado.id}';">Mostrar problemas</button>
+                        <button onclick="location.href='../../problema/create';">Crear problema</button>
+                        <button onclick="location.href='../logout';">Cerrar sesión</button>
+                    </fieldset>
                 </div>
             </section>
         </div>

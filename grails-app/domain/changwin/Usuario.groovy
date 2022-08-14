@@ -11,6 +11,10 @@ abstract class Usuario {
         contrasenia password: true, blank: false, nullable: false
     }
 
+    String toString() {
+        return nombre
+    }
+
     def chatear(Cotizacion cotizacion, Mensaje mensaje) {
         cotizacion.recibirMensaje(mensaje)
     }

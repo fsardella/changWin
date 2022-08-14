@@ -7,4 +7,8 @@ class Rubro {
     static constraints = {
         nombre blank: false, nullable: false
     }
+
+    String toString() {
+        return nombre
+    }
 }

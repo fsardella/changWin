@@ -3,7 +3,12 @@ package changwin
 class BootStrap {
 
     def init = { servletContext ->
-        servletContext["nombreUsuario"] = "pepito"
+        Rubro plomeria = new Rubro(nombre: "Plomeria")
+        Rubro electricidad = new Rubro(nombre: "Electricidad")
+        Rubro pintor = new Rubro(nombre: "Pintor")
+        plomeria.save()
+        electricidad.save()
+        pintor.save()
     }
     def destroy = {
     }

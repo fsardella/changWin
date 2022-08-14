@@ -21,15 +21,17 @@ class Necesitado extends Usuario {
         return this.problemas.clone()
     }
 
-    def crearProblema(String descripcion,
+    Problema crearProblema(String descripcion,
                     Rubro rubro,
                     String ubicacion,
                     BarrioProblema barrio,
                     List multimedia = [],
                     Boolean emergencia = false) {
-        problemas << new Problema(descripcion:descripcion, rubro:rubro,
+        Problema problema = new Problema(descripcion:descripcion, rubro:rubro,
                                 necesitado:this, emergencia:emergencia, ubicacion:ubicacion,
                                 barrio:barrio, multimedia:multimedia)
+        problemas << problema
+        return problema
     }
 
     def eliminarProblema(Problema problema) {

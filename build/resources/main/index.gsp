@@ -2,7 +2,10 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
+    <title>Chang-Win</title>
+    <g:if test="${application.usuarioActual != null}">
+        <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${application.usuarioActual.id}'" />
+    </g:if>
 </head>
 <body>
 
@@ -43,7 +46,7 @@
 </div>
 <div class="role-selector">
     <button type="button" style="background:#7f7f7f"
-    onclick="location.href='necesitado';"> Loguearse como necesitado</button>
+    onclick="location.href='necesitado/login';"> Loguearse como necesitado</button>
     <button type="button" style="background:#54000d">Loguearse como experto</button>
 </div>
 
