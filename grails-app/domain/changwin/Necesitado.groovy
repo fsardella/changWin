@@ -11,7 +11,7 @@ public enum MetodoDePago {
 
 class Necesitado extends Usuario {
     MetodoDePago metodoDePago
-    List<Problema> problemas = []
+    private List<Problema> problemas = []
 
     static constraints = {
         nombre blank: false, nullable: false
