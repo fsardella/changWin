@@ -9,6 +9,10 @@ class BootStrap {
         plomeria.save()
         electricidad.save()
         pintor.save()
+        Necesitado cristo = new Necesitado(nombre: "Cristo", mail:"asdf@gmail.com", contrasenia: "123",
+                                          metodoDePago: MetodoDePago.EFECTIVO)
+        cristo.save()
+        servletContext["usuarioActual"] = cristo
     }
     def destroy = {
     }

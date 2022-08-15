@@ -23,11 +23,13 @@
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${problemaList}" />
-
-                    <g:if test="${problemaList.size() > params.int('max')}">
+                    <f:table collection="${problemasDeUsuario}" />
+                    <g:if test="cantProblemasUsuario == 0">
+                        <div class="message" role="status">NO HAY ELEMENTOS. ACA ALGO ANDA MAL</div>
+                    </g:if>
+                    <g:if test="${cantProblemasUsuario > params.int('max')}">
                     <div class="pagination">
-                        <g:paginate total="${problemaList.size() ?: 0}" />
+                        <g:paginate total="${cantProblemasUsuario ?: 0}" />
                     </div>
                     </g:if>
                 </div>

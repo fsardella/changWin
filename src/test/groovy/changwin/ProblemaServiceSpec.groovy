@@ -12,7 +12,5 @@ class ProblemaServiceSpec extends Specification implements ServiceUnitTest<Probl
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
     }
 }

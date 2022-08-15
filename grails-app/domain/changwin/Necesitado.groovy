@@ -2,16 +2,16 @@ package changwin
 
 import java.time.LocalDateTime
 
+public enum MetodoDePago {
+    EFECTIVO,
+    CREDITO,
+    DEBITO,
+    TRANSFERENCIA
+}
+
 class Necesitado extends Usuario {
     MetodoDePago metodoDePago
-    private List<Problema> problemas = []
-
-    public enum MetodoDePago {
-        EFECTIVO,
-        CREDITO,
-        DEBITO,
-        TRANSFERENCIA
-    }
+    List<Problema> problemas = []
 
     static constraints = {
         nombre blank: false, nullable: false

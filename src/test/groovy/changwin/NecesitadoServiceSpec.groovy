@@ -12,7 +12,6 @@ class NecesitadoServiceSpec extends Specification implements ServiceUnitTest<Nec
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+
     }
 }

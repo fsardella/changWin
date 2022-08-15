@@ -12,7 +12,8 @@ class NecesitadoController {
     }
 
     def mostrarProblemasDeNecesitado() {
-        respond necesitadoService.obtenerProblemasDeNecesitado(params.id.toInteger())
+        List<Problema> response = necesitadoService.obtenerProblemasDeNecesitado(params.id.toInteger())
+        respond (response, model:[problemasDeUsuario: response, cantProblemasUsuario: response.size()])
     }
 
     def login() {
@@ -33,4 +34,5 @@ class NecesitadoController {
         servletContext.removeAttribute("usuarioActual")
         redirect uri:"/"
     }
-}
+
+}   
