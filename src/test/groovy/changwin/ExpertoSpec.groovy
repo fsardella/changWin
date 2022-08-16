@@ -35,7 +35,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
         experto.agregarRubro(otroCertificado, ente)
 
         Rubro rubroPayaso = new Rubro(nombre: "payaso")
-        List certificados = experto.obtenerCertificados()
+        Set<Certificado> certificados = experto.certificados
         expect:
             certificados.every{cert -> (cert.rubro == rubro || cert.rubro == otroRubro)
                                         && cert.rubro != rubroPayaso}
@@ -55,7 +55,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
                                       experto: experto)
         experto.agregarRubro(certificadoPayaso, ente)
         experto.eliminarRubro(certificadoPayaso)
-        List certificados = experto.obtenerCertificados()
+        Set<Certificado> certificados = experto.certificados
         expect:
             certificados.every{cert -> (cert.rubro == rubro || cert.rubro == otroRubro)
                                         && cert.rubro != rubroPayaso}
@@ -63,19 +63,17 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Cotizar un problema"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000
         experto.cotizarProblema(problema, costo)
         expect:
-            experto.obtenerCotizaciones().size() == 1
+            experto.cotizaciones.size() == 1
     }
 
     void "Cotizar un problema con rubro invalido"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         BigDecimal costo = 10000
         Rubro rubroIncorrecto =  new Rubro(nombre: "payaso")
         Certificado certificadoIncorrecto = new Certificado(rubro: rubroIncorrecto, numeroMatricula: 456789,
@@ -90,8 +88,7 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Cotizar un problema con certificado vencido"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         BigDecimal costo = 10000
         Certificado certificadoIncorrecto = new Certificado(rubro: rubro, numeroMatricula: 456789,
                                       fechaEmision: LocalDateTime.of(1969, 7, 29, 19, 30, 40),
@@ -105,12 +102,10 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "No se puede cotizar un problema ya confirmado"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000
-        experto.cotizarProblema(problema, costo)
-        Cotizacion cotizacion = experto.obtenerCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, costo)
         necesitado.aceptarCotizacion(problema, cotizacion, LocalDateTime.now())
 
         expect:
@@ -119,12 +114,10 @@ class ExpertoSpec extends Specification implements DomainUnitTest<Experto> {
 
     void "Chatear con Necesitado"() {
         Necesitado necesitado = new Necesitado(nombre: "Cristo")
-        necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema("Goteo", rubro, "CalleFalsa 123", BarrioProblema.PALERMO)
         experto.agregarRubro(certificado, ente)
         BigDecimal costo = 10000
-        experto.cotizarProblema(problema, costo)
-        Cotizacion cotizacion = experto.obtenerCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, costo)
 
         Mensaje mensaje = new Mensaje(usuarioEmisor: experto, mensaje: "Hola")
         experto.chatear(cotizacion, mensaje)

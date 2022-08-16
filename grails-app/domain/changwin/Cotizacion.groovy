@@ -14,7 +14,8 @@ class Cotizacion {
 
     public enum EstadoCotizacion {
         EN_ESPERA,
-        CONFIRMADA
+        CONFIRMADA,
+        RECHAZADA
     }
 
     static constraints = {

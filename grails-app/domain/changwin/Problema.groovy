@@ -1,11 +1,17 @@
 package changwin
 
 import java.time.LocalDateTime
+import org.apache.commons.lang3.StringUtils
 
 public enum BarrioProblema {
     PALERMO,
     SAN_TELMO,
     RECOLETA
+}
+
+public enum EstadoEmergencia {
+    URGENTE,
+    REGULAR
 }
 
 class Problema {
@@ -14,15 +20,19 @@ class Problema {
     Necesitado necesitado
     String ubicacion
     BarrioProblema barrio
-    Boolean emergencia = false
+    EstadoEmergencia emergencia = EstadoEmergencia.REGULAR
     private EstadoProblema estado = EstadoProblema.EN_ESPERA
     private List<String> multimedia = []
-    private List<Cotizacion> cotizaciones = []
+    Set<Cotizacion> cotizaciones = []
 
     public enum EstadoProblema {
         EN_ESPERA,
         CONFIRMADO
     }
+    
+    static hasMany = [
+        cotizaciones: Cotizacion
+    ]
 
     static constraints = {
         descripcion blank: false, nullable: false
@@ -32,16 +42,21 @@ class Problema {
         barrio blank: false, nullable: false
     }
 
-    def getCotizaciones() {
-        return this.cotizaciones.clone()
+    static belongsTo = [
+        necesitado: Necesitado
+    ]
+
+    String toString() {
+        String ret = "${rubro}: ${descripcion}"
+        return ret.size() > 20 ? StringUtils.abbreviate(ret, 20) : ret
     }
 
     def getCotizacionAceptada() {
-        List aceptadas = cotizaciones.findAll{cot -> cot.estaConfirmada()}
+        Set<Cotizacion> aceptadas = cotizaciones.findAll{cot -> cot.estaConfirmada()}
         if (aceptadas.size() != 1) {
             throw new Exception("No hay una cotizacion confirmada, o hay mas de una")
         }
-        return aceptadas.get(0)
+        return aceptadas.iterator().next()
     }
     
     def agregarCotizacion(Cotizacion cotizacion) {
@@ -64,7 +79,7 @@ class Problema {
     }
 
     def esUrgente() {
-        return this.emergencia
+        return this.emergencia == EstadoEmergencia.URGENTE
     }
 
     def aceptarCotizacion(Cotizacion cotizacion, LocalDateTime fechaDeReunion) {

@@ -43,48 +43,54 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
         necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
                                  barrioDeProblema, imagenesDeProblema)
         expect:
-            necesitado.obtenerProblemas().size() == 1
-            Problema problemaObtenido = necesitado.obtenerProblemas().get(0)
-            problemaObtenido.descripcion == problemaEsperado.descripcion
-            problemaObtenido.rubro == problemaEsperado.rubro
-            problemaObtenido.necesitado == problemaEsperado.necesitado
-            problemaObtenido.ubicacion == problemaEsperado.ubicacion
-            problemaObtenido.barrio == problemaEsperado.barrio
-            problemaObtenido.getMultimedia() == problemaEsperado.getMultimedia()
+            necesitado.problemas.size() == 1
+            necesitado.problemas.forEach {
+                problemaObtenido -> 
+                problemaObtenido.descripcion == problemaEsperado.descripcion
+                problemaObtenido.rubro == problemaEsperado.rubro
+                problemaObtenido.necesitado == problemaEsperado.necesitado
+                problemaObtenido.ubicacion == problemaEsperado.ubicacion
+                problemaObtenido.barrio == problemaEsperado.barrio
+                problemaObtenido.getMultimedia() == problemaEsperado.getMultimedia()
+            }
     }
 
     void "Eliminar problema"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
-                                 barrioDeProblema, imagenesDeProblema)
-        Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
+        Problema problemaAEliminar = necesitado.crearProblema(descripcionDeProblema,
+                                                              rubroDeProblema,
+                                                              ubicacionDeProblema,
+                                                              barrioDeProblema,
+                                                              imagenesDeProblema)
         necesitado.eliminarProblema(problemaAEliminar)
         expect:
-            necesitado.obtenerProblemas().size() == 0
+            necesitado.problemas.size() == 0
     }
 
     void "Eliminar problema elimina sus cotizaciones"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
-                                 barrioDeProblema, imagenesDeProblema)
-        Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
-
+        Problema problemaAEliminar = necesitado.crearProblema(descripcionDeProblema,
+                                                              rubroDeProblema,
+                                                              ubicacionDeProblema,
+                                                              barrioDeProblema,
+                                                              imagenesDeProblema)
         experto.cotizarProblema(problemaAEliminar, 10000)
         experto.cotizarProblema(problemaAEliminar, 25000)
         experto.cotizarProblema(problemaAEliminar, 100)
 
         necesitado.eliminarProblema(problemaAEliminar)
         expect:
-            necesitado.obtenerProblemas().size() == 0
-            problemaAEliminar.getCotizaciones().size() == 0
-            experto.obtenerCotizaciones().size() == 0
+            necesitado.problemas.size() == 0
+            problemaAEliminar.cotizaciones.size() == 0
+            experto.cotizaciones.size() == 0
     }
 
     void "No se puede eliminar un problema que fue confirmado"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema, ubicacionDeProblema,
-                                 barrioDeProblema, imagenesDeProblema)
-        Problema problemaAEliminar = necesitado.obtenerProblemas().get(0)
+        Problema problemaAEliminar = necesitado.crearProblema(descripcionDeProblema,
+                                                              rubroDeProblema,
+                                                              ubicacionDeProblema,
+                                                              barrioDeProblema,
+                                                              imagenesDeProblema)
 
-        experto.cotizarProblema(problemaAEliminar, 10000)
-        Cotizacion cotizacion = problemaAEliminar.getCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problemaAEliminar, 10000)
         LocalDateTime dia = LocalDateTime.now()
         necesitado.aceptarCotizacion(problemaAEliminar, cotizacion, dia)
         expect:
@@ -92,72 +98,72 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "Crear un problema con emergencia"() {
-        necesitado.crearProblema(descripcionDeProblema,
-                                rubroDeProblema, ubicacionDeProblema,
-                                barrioDeProblema,
-                                imagenesDeProblema, 
-                                true)
-        necesitado.crearProblema(descripcionDeProblema,
-                                rubroDeProblema, ubicacionDeProblema,
-                                barrioDeProblema,
-                                imagenesDeProblema)
+        Problema problemaUrgente = necesitado.crearProblema(descripcionDeProblema,
+                                                      rubroDeProblema,
+                                                      ubicacionDeProblema,
+                                                      barrioDeProblema,
+                                                      imagenesDeProblema, 
+                                                      EstadoEmergencia.URGENTE)
+        Problema problemaRegular = necesitado.crearProblema(descripcionDeProblema,
+                                                      rubroDeProblema,
+                                                      ubicacionDeProblema,
+                                                     barrioDeProblema,
+                                                     imagenesDeProblema)
         expect:
-            necesitado.obtenerProblemas().get(0).esUrgente()
-            !necesitado.obtenerProblemas().get(1).esUrgente()
+            problemaUrgente.esUrgente()
+            !problemaRegular.esUrgente()
+            necesitado.problemas.size() == 2
     }
 
     void "Cambiar descripcion de problema"() {
-        necesitado.crearProblema(descripcionDeProblema,
-                                rubroDeProblema, ubicacionDeProblema,
-                                barrioDeProblema,
-                                imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
+                                                     rubroDeProblema,
+                                                     ubicacionDeProblema,
+                                                     barrioDeProblema,
+                                                     imagenesDeProblema)
         necesitado.cambiarDescripcionProblema(problema, "Goteo de tuberia")
         expect:
-            necesitado.obtenerProblemas().get(0).getDescripcion() == "Goteo de tuberia"
+            problema.getDescripcion() == "Goteo de tuberia"
     }
 
     void "Un problema cotizado no puede cambiar su descripción"() {
-        necesitado.crearProblema(descripcionDeProblema,
-                                rubroDeProblema, ubicacionDeProblema,
-                                barrioDeProblema,
-                                imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
+                                                     rubroDeProblema,
+                                                     ubicacionDeProblema,
+                                                     barrioDeProblema,
+                                                     imagenesDeProblema)
         experto.cotizarProblema(problema, 10000)
         expect:
             shouldFail{necesitado.cambiarDescripcionProblema(problema, "Fiesta de cumpleaños")}
     }
 
     void "Subir nueva imagen al problema"() {
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
         necesitado.agregarImagenProblema(problema, "imagen.png")
         expect:
-            necesitado.obtenerProblemas().get(0).getMultimedia() == ["roto.png", "tuberia.png", "imagen.png"]
+            problema.getMultimedia() == ["roto.png", "tuberia.png", "imagen.png"]
     }
 
     void "Un problema no confirmado no puede ser calificado"() {
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
         expect:
             shouldFail{necesitado.calificar(problema, 10)}
     }
 
     void "Aceptar una cotizacion"() {
-        necesitado.crearProblema(descripcionDeProblema,
-                                rubroDeProblema, ubicacionDeProblema,
-                                barrioDeProblema,
-                                imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
+                                                     rubroDeProblema,
+                                                     ubicacionDeProblema,
+                                                     barrioDeProblema,
+                                                     imagenesDeProblema)
         BigDecimal costo = 100000
-        experto.cotizarProblema(problema, costo)
-        Cotizacion cotizacion = problema.getCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, costo)
         LocalDateTime dia = LocalDateTime.now()
         necesitado.aceptarCotizacion(problema, cotizacion, dia)
         expect:
@@ -166,15 +172,12 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "No se pueden aceptar dos cotizaciones distintas"() {
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
-        experto.cotizarProblema(problema, 100000)
-        experto.cotizarProblema(problema, 250000)
-        Cotizacion cotizacion = problema.getCotizaciones().get(0)
-        Cotizacion otraCotizacion = problema.getCotizaciones().get(1)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, 100000)
+        Cotizacion otraCotizacion = experto.cotizarProblema(problema, 250000)
         LocalDateTime dia = LocalDateTime.now()
         necesitado.aceptarCotizacion(problema, cotizacion, dia)
         expect:
@@ -182,14 +185,12 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "Calificar un problema confirmado"() {
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 100000
-        experto.cotizarProblema(problema, costo)
-        Cotizacion cotizacion = problema.getCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, costo)
         LocalDateTime dia = LocalDateTime.now() // dia acordado por chat
         necesitado.aceptarCotizacion(problema, cotizacion, dia)
         Integer calificacion = 10
@@ -199,20 +200,16 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
 
     void "No se pueden calificar problemas fuera del limite temporal"() {
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema1 = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        necesitado.crearProblema(descripcionDeProblema,
+        Problema problema2 = necesitado.crearProblema(descripcionDeProblema,
                                 rubroDeProblema, ubicacionDeProblema,
                                 barrioDeProblema,
                                 imagenesDeProblema)
-        Problema problema1 = necesitado.obtenerProblemas().get(0)
-        Problema problema2 = necesitado.obtenerProblemas().get(1)
-        experto.cotizarProblema(problema1, 1000)
-        experto.cotizarProblema(problema2, 1000)
-        Cotizacion cotizacion1 = problema1.getCotizaciones().get(0)
-        Cotizacion cotizacion2 = problema2.getCotizaciones().get(0)
+        Cotizacion cotizacion1 = experto.cotizarProblema(problema1, 1000)
+        Cotizacion cotizacion2 = experto.cotizarProblema(problema2, 1000)
         LocalDateTime diaDespues = LocalDateTime.now().plusDays(5)
         LocalDateTime diaMuchoAntes = LocalDateTime.now().minusDays(31)
         necesitado.aceptarCotizacion(problema1, cotizacion1, diaDespues)
@@ -223,13 +220,11 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
     }
     
     void "Chatear con Experto"() {
-        necesitado.crearProblema(descripcionDeProblema, rubroDeProblema,
+        Problema problema = necesitado.crearProblema(descripcionDeProblema, rubroDeProblema,
                                  ubicacionDeProblema, barrioDeProblema,
                                  imagenesDeProblema)
-        Problema problema = necesitado.obtenerProblemas().get(0)
         BigDecimal costo = 100000
-        experto.cotizarProblema(problema, costo)
-        Cotizacion cotizacion = problema.getCotizaciones().get(0)
+        Cotizacion cotizacion = experto.cotizarProblema(problema, costo)
 
         Mensaje mensaje = new Mensaje(usuarioEmisor: necesitado, mensaje: "Chau")
         necesitado.chatear(cotizacion, mensaje)

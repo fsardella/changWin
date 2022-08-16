@@ -12,8 +12,8 @@ class NecesitadoController {
     }
 
     def mostrarProblemasDeNecesitado() {
-        List<Problema> response = necesitadoService.obtenerProblemasDeNecesitado(params.id.toInteger())
-        respond (response, model:[problemasDeUsuario: response, cantProblemasUsuario: response.size()])
+        Set<Problema> response = necesitadoService.obtenerProblemasDeNecesitado(params.id.toInteger())
+        respond (response, model:[problemasDeUsuario: response, cantProblemasUsuario: response.size(), maxProblemasPerPage: 25])
     }
 
     def login() {

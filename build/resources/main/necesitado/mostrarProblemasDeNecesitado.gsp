@@ -24,15 +24,12 @@
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <f:table collection="${problemasDeUsuario}" />
-                    <g:if test="cantProblemasUsuario == problemasDeUsuario.size()">
-                        <div class="message" role="status">JEJEXD</div>
+                    <g:if test="${cantProblemasUsuario == 0}">
+                        <div class="message" role="status">NO HAY ELEMENTOS. ACA ALGO ANDA MAL</div>
                     </g:if>
-                    <g:if test="cantProblemasUsuario == 0">
-                        <div class="message" role="status">LA CONCHA DE TU MADR E E E E E</div>
-                    </g:if>
-                    <g:if test="${problemasDeUsuario.size() > params.int('max')}">
+                    <g:if test="${cantProblemasUsuario > maxProblemasPerPage}">
                     <div class="pagination">
-                        <g:paginate total="${problemasDeUsuario.size() ?: 0}" />
+                        <g:paginate total="${cantProblemasUsuario ?: 0}" />
                     </div>
                     </g:if>
                 </div>

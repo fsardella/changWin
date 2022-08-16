@@ -16,6 +16,6 @@ class ProblemaService {
         problema.save()
         // debug
         print "El necesitado ${necesitadoActual.nombre} es fetcheado y tiene los problemas: "
-        println Necesitado.get(servletContext["usuarioActual"].id).obtenerProblemas()
+        println Necesitado.get(servletContext["usuarioActual"].id).problemas
     }
 }

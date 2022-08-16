@@ -11,22 +11,22 @@ public enum MetodoDePago {
 
 class Necesitado extends Usuario {
     MetodoDePago metodoDePago
-    private List<Problema> problemas = []
+    Set<Problema> problemas = []
 
     static constraints = {
         nombre blank: false, nullable: false
     }
 
-    def obtenerProblemas() {
-        return this.problemas.clone()
-    }
+    static hasMany = [
+        problemas: Problema
+    ]
 
     Problema crearProblema(String descripcion,
                     Rubro rubro,
                     String ubicacion,
                     BarrioProblema barrio,
                     List multimedia = [],
-                    Boolean emergencia = false) {
+                    EstadoEmergencia emergencia = EstadoEmergencia.REGULAR) {
         Problema problema = new Problema(descripcion:descripcion, rubro:rubro,
                                 necesitado:this, emergencia:emergencia, ubicacion:ubicacion,
                                 barrio:barrio, multimedia:multimedia)

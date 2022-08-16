@@ -1,20 +1,17 @@
 package changwin
 
 class Experto extends Usuario {
-    private List<Certificado> certificados = []
-    private List<Cotizacion> cotizaciones = []
+    Set<Certificado> certificados = []
+    Set<Cotizacion> cotizaciones = []
 
     static constraints = {
         nombre blank: false, nullable: false
     }
 
-    def obtenerCertificados() {
-        return this.certificados.clone()
-    }
-
-    def obtenerCotizaciones() {
-        return this.cotizaciones.clone()
-    }
+    static hasMany = [
+        cotizaciones: Cotizacion,
+        certificados: Certificado
+    ]
 
     def agregarRubro(Certificado certificado, EnteCertificador enteCertificador) {
         this.certificados << certificado
@@ -22,7 +19,7 @@ class Experto extends Usuario {
     }
 
     def actualizarCertificado(Certificado certificado) {
-        List eliminables = this.certificados.findAll{cert -> cert.rubro == certificado.rubro
+        Set<Certificado> eliminables = this.certificados.findAll{cert -> cert.rubro == certificado.rubro
                                                              && cert != certificado}
         this.certificados.removeAll{cert -> eliminables.contains(cert)}
     }
@@ -33,7 +30,7 @@ class Experto extends Usuario {
         }
         this.certificados.removeElement(certificado)
 
-        List eliminables = this.cotizaciones.findAll{cot -> cot.getRubro() == certificado.rubro
+        Set<Cotizacion> eliminables = this.cotizaciones.findAll{cot -> cot.getRubro() == certificado.rubro
                                                             && !cot.estaConfirmada()}
         eliminables.forEach{elim -> this.eliminarCotizacion(elim)}
     }
@@ -46,7 +43,7 @@ class Experto extends Usuario {
         cotizacion.eliminar()
     }
 
-    def cotizarProblema(Problema problema, BigDecimal costo) {
+    Cotizacion cotizarProblema(Problema problema, BigDecimal costo) {
         if (!this.certificados.any{cert -> problema.rubro == cert.rubro && cert.esValido()}) {
             throw new Exception("Acceso con rubro ilegal")
         }
@@ -56,5 +53,6 @@ class Experto extends Usuario {
         Cotizacion cotizacion = new Cotizacion(costo: new Dinero(monto:costo), experto: this, problema: problema)
         problema.agregarCotizacion(cotizacion)
         cotizaciones << cotizacion
+        cotizacion
     }
 }
