@@ -28,12 +28,6 @@
                     </g:if>
                     <g:hasErrors bean="${this.necesitado}">
                     <ul class="errors" role="alert">
-                        <%-- <g:eachError bean="${this.necesitado}" var="error">
-                            <g:if test="${error == 'contraseniaInvalida.changwin.Necesitado'}">
-                                print
-                                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                            </g:if>
-                        </g:eachError> --%>
                         <li>Login inválido</li>
                     </ul>
                     </g:hasErrors>

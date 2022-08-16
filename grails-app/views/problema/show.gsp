@@ -31,6 +31,11 @@
                             <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </fieldset>
                     </g:form>
+                    <g:if test="${application.usuarioActual != null && application.usuarioActual instanceof changwin.Experto}">
+                        <fieldset class="buttons">
+                            <button onclick="location.href='../../cotizacion/create/${this.problema.id}';">Cotizar</button>
+                        </fieldset>
+                    </g:if>
                 </div>
             </section>
         </div>

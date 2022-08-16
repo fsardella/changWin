@@ -4,7 +4,12 @@
     <meta name="layout" content="main"/>
     <title>Chang-Win</title>
     <g:if test="${application.usuarioActual != null}">
-        <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${application.usuarioActual.id}'" />
+        <g:if test="${application.usuarioActual instanceof changwin.Necesitado}">
+            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${application.usuarioActual.id}'" />
+        </g:if>
+        <g:else>
+            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/experto/show/${application.usuarioActual.id}'" />
+        </g:else>
     </g:if>
 </head>
 <body>
@@ -42,12 +47,14 @@
 <div class="role-selector">
     <button type="button" style="background:#aaaaaa"
     onclick="location.href='necesitado/create';">Registrarse como necesitado</button>
-    <button type="button" style="background:#880016">Registrarse como experto</button>
+    <button type="button" style="background:#880016"
+    onclick="location.href='experto/create';">Registrarse como experto</button>
 </div>
 <div class="role-selector">
     <button type="button" style="background:#7f7f7f"
-    onclick="location.href='necesitado/login';"> Loguearse como necesitado</button>
-    <button type="button" style="background:#54000d">Loguearse como experto</button>
+    onclick="location.href='necesitado/login';">Loguearse como necesitado</button>
+    <button type="button" style="background:#54000d"
+     onclick="location.href='experto/login';">Loguearse como experto</button>
 </div>
 
 </body>

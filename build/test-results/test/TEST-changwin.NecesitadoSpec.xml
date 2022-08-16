@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="changwin.NecesitadoSpec" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-08-16T15:43:45" hostname="HP-SAR" time="0.115">
+<testsuite name="changwin.NecesitadoSpec" tests="14" skipped="0" failures="0" errors="0" timestamp="2022-08-16T21:26:18" hostname="Belladonna" time="1.458">
   <properties/>
-  <testcase name="Crear problema" classname="changwin.NecesitadoSpec" time="0.015"/>
-  <testcase name="Eliminar problema" classname="changwin.NecesitadoSpec" time="0.005"/>
-  <testcase name="Eliminar problema elimina sus cotizaciones" classname="changwin.NecesitadoSpec" time="0.008"/>
-  <testcase name="No se puede eliminar un problema que fue confirmado" classname="changwin.NecesitadoSpec" time="0.008"/>
-  <testcase name="Crear un problema con emergencia" classname="changwin.NecesitadoSpec" time="0.004"/>
-  <testcase name="Cambiar descripcion de problema" classname="changwin.NecesitadoSpec" time="0.005"/>
-  <testcase name="Un problema cotizado no puede cambiar su descripción" classname="changwin.NecesitadoSpec" time="0.005"/>
-  <testcase name="Subir nueva imagen al problema" classname="changwin.NecesitadoSpec" time="0.004"/>
-  <testcase name="Un problema no confirmado no puede ser calificado" classname="changwin.NecesitadoSpec" time="0.007"/>
-  <testcase name="Aceptar una cotizacion" classname="changwin.NecesitadoSpec" time="0.008"/>
-  <testcase name="No se pueden aceptar dos cotizaciones distintas" classname="changwin.NecesitadoSpec" time="0.006"/>
-  <testcase name="Calificar un problema confirmado" classname="changwin.NecesitadoSpec" time="0.026"/>
-  <testcase name="No se pueden calificar problemas fuera del limite temporal" classname="changwin.NecesitadoSpec" time="0.007"/>
-  <testcase name="Chatear con Experto" classname="changwin.NecesitadoSpec" time="0.003"/>
+  <testcase name="Crear problema" classname="changwin.NecesitadoSpec" time="0.868"/>
+  <testcase name="Eliminar problema" classname="changwin.NecesitadoSpec" time="0.021"/>
+  <testcase name="Eliminar problema elimina sus cotizaciones" classname="changwin.NecesitadoSpec" time="0.068"/>
+  <testcase name="No se puede eliminar un problema que fue confirmado" classname="changwin.NecesitadoSpec" time="0.06"/>
+  <testcase name="Crear un problema con emergencia" classname="changwin.NecesitadoSpec" time="0.017"/>
+  <testcase name="Cambiar descripcion de problema" classname="changwin.NecesitadoSpec" time="0.012"/>
+  <testcase name="Un problema cotizado no puede cambiar su descripción" classname="changwin.NecesitadoSpec" time="0.013"/>
+  <testcase name="Subir nueva imagen al problema" classname="changwin.NecesitadoSpec" time="0.014"/>
+  <testcase name="Un problema no confirmado no puede ser calificado" classname="changwin.NecesitadoSpec" time="0.016"/>
+  <testcase name="Aceptar una cotizacion" classname="changwin.NecesitadoSpec" time="0.128"/>
+  <testcase name="No se pueden aceptar dos cotizaciones distintas" classname="changwin.NecesitadoSpec" time="0.016"/>
+  <testcase name="Calificar un problema confirmado" classname="changwin.NecesitadoSpec" time="0.023"/>
+  <testcase name="No se pueden calificar problemas fuera del limite temporal" classname="changwin.NecesitadoSpec" time="0.023"/>
+  <testcase name="Chatear con Experto" classname="changwin.NecesitadoSpec" time="0.163"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

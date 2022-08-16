@@ -11,6 +11,10 @@ class Cotizacion {
     private LocalDateTime horaDeReunion
     private Integer calificacion = null
     private Chat chat = new Chat(cotizacion: this)
+    
+    static embedded = [
+        'costo'    
+    ]
 
     public enum EstadoCotizacion {
         EN_ESPERA,
