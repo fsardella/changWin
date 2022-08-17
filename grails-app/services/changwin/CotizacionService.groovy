@@ -16,6 +16,7 @@ class CotizacionService {
     def aceptarCotizacionDeExperto(int cotizacionId, def session, def params) {
         def necesitadoActual = Necesitado.get(session["usuarioActual"].id)
         def cotizacion = Cotizacion.get(cotizacionId)
-        necesitadoActual.aceptarCotizacion(cotizacion.problema, cotizacion, LocalDateTime.now())
+        LocalDateTime fechaDeReunion = LocalDateTime.of(params.fechaReunion_year.toInteger(), params.fechaReunion_month.toInteger(), params.fechaReunion_day.toInteger(), params.fechaReunion_hour.toInteger(), params.fechaReunion_minute.toInteger(), 0, 0)
+        necesitadoActual.aceptarCotizacion(cotizacion.problema, cotizacion, fechaDeReunion)
     }
 }

@@ -21,7 +21,7 @@ class Problema {
     String ubicacion
     BarrioProblema barrio
     EstadoEmergencia emergencia = EstadoEmergencia.REGULAR
-    private EstadoProblema estado = EstadoProblema.EN_ESPERA
+    EstadoProblema estado = EstadoProblema.EN_ESPERA
     private List<String> multimedia = []
     Set<Cotizacion> cotizaciones = []
 
@@ -86,7 +86,7 @@ class Problema {
         if (this.estaConfirmado()) {
             throw new Exception("Una cotizacion ya fue aceptada")
         }
-        this.estado = EstadoProblema.CONFIRMADO
+        this.setEstado(EstadoProblema.CONFIRMADO)
         this.cotizaciones.forEach{cot -> cot.rechazar()}
         cotizacion.aceptar(fechaDeReunion)
     }

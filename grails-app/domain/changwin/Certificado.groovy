@@ -13,7 +13,8 @@ class Certificado {
     public enum EstadoCertificacion {
         CERTIFICADO,
         EN_ESPERA,
-        RECHAZADO
+        RECHAZADO,
+        VENCIDO
     }
 
     static hasOne = [rubro: Rubro]
@@ -27,6 +28,9 @@ class Certificado {
     }
 
     String toString() {
+        if (!LocalDateTime.now().isBefore(fechaVencimiento)) {
+            this.setEstado(EstadoCertificacion.VENCIDO)
+        }
         return rubro
     }
 

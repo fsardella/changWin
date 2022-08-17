@@ -17,6 +17,10 @@ class CotizacionController {
         cotizacionService.save(cotizacion, session, params)
         redirect session["usuarioActual"]
     }
+
+    def aceptarCotizacion() {
+        session["problemaForLastCreatedCotizacion"] = params.fechaDeReunion
+    }
     
     def aceptar() {
         cotizacionService.aceptarCotizacionDeExperto(params.id.toInteger(), session, params)

@@ -40,4 +40,9 @@ class ExpertoController {
         Set<Problema> response = expertoService.obtenerProblemasDeExperto(params.id.toInteger())
         respond (response, model:[problemasDeExperto: response, cantProblemasUsuario: response.size(), maxProblemasPerPage: 25])
     }
+
+    def mostrarCertificados() {
+        Set<Certificado> response = expertoService.obtenerCertificadosDeExperto(params.id.toInteger())
+        respond (response, model:[certificadosDeExperto: response, cantCertificadosUsuario: response.size(), maxCertificadosPerPage: 25])
+    }
 }

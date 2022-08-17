@@ -38,3 +38,8 @@
 .role-selector button:active{
   opacity: 1.2;
 }
+
+.fecha-field {
+  text-align: right;
+  margin-right: 45.5%;
+}

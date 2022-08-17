@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'problema.label', default: 'Problema')}" />
+        <g:set var="entityName" value="${message(code: 'experto.label', default: 'Experto')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
     <div id="content" role="main">
         <div class="container">
             <section class="row">
-                <a href="#list-problema" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+                <a href="#list-experto" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
                 <div class="nav" role="navigation">
                     <ul>
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
@@ -17,15 +17,15 @@
                 </div>
             </section>
             <section class="row">
-                <div id="list-problema" class="col-12 content scaffold-list" role="main">
-                    <h1><g:message code="Cotizaciones de problema"/></h1>
+                <div id="list-experto" class="col-12 content scaffold-list" role="main">
+                    <h1><g:message code="Certificados"/></h1>
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:table collection="${cotizacionesDeProblema}" />
-                    <g:if test="${cantCotizacionesProblema > maxCotizacionesPerPage}">
+                    <f:table collection="${certificadosDeExperto}" />
+                    <g:if test="${cantCertificadosUsuario > maxCertificadosPerPage}">
                     <div class="pagination">
-                        <g:paginate total="${cantCotizacionesProblema ?: 0}" />
+                        <g:paginate total="${cantCertificadosUsuario ?: 0}" />
                     </div>
                     </g:if>
                 </div>

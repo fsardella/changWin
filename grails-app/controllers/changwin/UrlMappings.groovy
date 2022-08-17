@@ -3,13 +3,10 @@ package changwin
 class UrlMappings {
 
     static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
-            constraints {
-                // apply constraints here
-            }
-        }
+        "/$controller/$action?/$id?(.$format)?"{}
 
-        "/"(view:"/index")
+        "/frontPage"(view:'/frontPage')
+        "/"(view:'/index', controller:'redirect', action:'redirectFrontPage')
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
