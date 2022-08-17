@@ -32,7 +32,12 @@
                     </g:hasErrors>
                     <g:form resource="${this.certificado}" method="POST">
                         <fieldset class="form">
-                            <f:all bean="certificado"/>
+                            <f:with bean="certificado">
+                                <f:field property="numeroMatricula"/>
+                                <f:field type="datetime-local" property="fechaEmision"/>
+                                <f:field type="datetime-local" property="fechaVencimiento"/>
+                                <f:field property="rubro"/>
+                            </f:with>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

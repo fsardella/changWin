@@ -9,6 +9,9 @@ class BootStrap {
         plomeria.save()
         electricidad.save()
         pintor.save()
+        EnteCertificador enteCertificador = new EnteCertificador()
+        enteCertificador.save()
+        servletContext["enteCertificador"] = enteCertificador
         Necesitado cristo = new Necesitado(nombre: "Cristo", mail:"asdf@gmail.com", contrasenia: "123",
                                           metodoDePago: MetodoDePago.EFECTIVO)
         cristo.save()

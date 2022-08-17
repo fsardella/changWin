@@ -22,6 +22,10 @@ class Certificado {
         fechaVencimiento blank: false, nullable: false
     }
 
+    String toString() {
+        return rubro
+    }
+
     def aceptar() {
         this.estado = EstadoCertificacion.CERTIFICADO
         this.experto.actualizarCertificado(this)

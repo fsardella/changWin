@@ -45,7 +45,8 @@ class Experto extends Usuario {
 
     Cotizacion cotizarProblema(Problema problema, BigDecimal costo) {
         if (!this.certificados.any{cert -> problema.rubro == cert.rubro && cert.esValido()}) {
-            throw new Exception("Acceso con rubro ilegal")
+            this.certificados.forEach{cert -> println "el rubro del cert es ${cert.rubro} y es valido es ${cert.esValido()}, la comparacion da ${problema.rubro == cert.rubro}"}
+            throw new Exception("Acceso con rubro ilegal, el rubro del problema es ${problema.rubro}")
         }
         if (problema.estaConfirmado()) {
             throw new Exception("El problema ya fue confirmado")
