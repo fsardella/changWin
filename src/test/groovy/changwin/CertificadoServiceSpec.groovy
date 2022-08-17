@@ -12,7 +12,5 @@ class CertificadoServiceSpec extends Specification implements ServiceUnitTest<Ce
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
     }
 }

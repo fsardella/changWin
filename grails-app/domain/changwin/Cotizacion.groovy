@@ -8,14 +8,19 @@ class Cotizacion {
     Experto experto
     Problema problema
     EstadoCotizacion estado = EstadoCotizacion.EN_ESPERA
-    private LocalDateTime horaDeReunion
+    LocalDateTime horaDeReunion
     private Integer calificacion = null
     private Chat chat = new Chat(cotizacion: this)
     
     static embedded = [
-        'costo'    
+        'costo'
     ]
 
+    static belongsTo = [
+        experto: Experto,
+        problema: Problema
+    ]
+    
     public enum EstadoCotizacion {
         EN_ESPERA,
         CONFIRMADA,
@@ -73,5 +78,9 @@ class Cotizacion {
 
     def getRubro() {
         return this.problema.rubro
+    }
+    
+    String toString() {
+        return "Cotizacion: ${costo}"
     }
 }

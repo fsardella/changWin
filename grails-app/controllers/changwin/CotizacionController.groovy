@@ -6,13 +6,12 @@ class CotizacionController {
     static scaffold = Cotizacion
 
     def create() {
-        println Problema.get(params.id)
         servletContext["problemaForLastCreatedCotizacion"] = Problema.get(params.id)
         respond new Cotizacion(params)
     }
     
     def save(Cotizacion cotizacion) {
-        cotizacionService.save(cotizacion, servletContext)
+        cotizacionService.save(cotizacion, servletContext, params)
         redirect servletContext["usuarioActual"]
     }
     

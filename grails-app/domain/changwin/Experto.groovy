@@ -44,14 +44,15 @@ class Experto extends Usuario {
     }
 
     Cotizacion cotizarProblema(Problema problema, BigDecimal costo) {
-        if (!this.certificados.any{cert -> problema.rubro == cert.rubro && cert.esValido()}) {
-            this.certificados.forEach{cert -> println "el rubro del cert es ${cert.rubro} y es valido es ${cert.esValido()}, la comparacion da ${problema.rubro == cert.rubro}"}
+        if (!this.certificados.any{cert -> problema.rubro.nombre == cert.rubro.nombre && cert.esValido()}) {
             throw new Exception("Acceso con rubro ilegal, el rubro del problema es ${problema.rubro}")
         }
         if (problema.estaConfirmado()) {
             throw new Exception("El problema ya fue confirmado")
         }
+        println "La cantidad de dinero que entra es ${costo}"
         Cotizacion cotizacion = new Cotizacion(costo: new Dinero(monto:costo), experto: this, problema: problema)
+        println "tiene el dinero ${cotizacion.costo}"
         problema.agregarCotizacion(cotizacion)
         cotizaciones << cotizacion
         cotizacion

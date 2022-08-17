@@ -4,7 +4,7 @@ import java.time.LocalDateTime
 
 class Certificado {
     Rubro rubro
-    private EstadoCertificacion estado = EstadoCertificacion.EN_ESPERA
+    EstadoCertificacion estado = EstadoCertificacion.EN_ESPERA
     Integer numeroMatricula
     LocalDateTime fechaEmision
     LocalDateTime fechaVencimiento
@@ -15,6 +15,10 @@ class Certificado {
         EN_ESPERA,
         RECHAZADO
     }
+
+    static hasOne = [rubro: Rubro]
+
+    static belongsTo = [experto: Experto]
 
     static constraints = {
         numeroMatricula blank: false, nullable: false
