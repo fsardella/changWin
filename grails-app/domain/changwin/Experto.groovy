@@ -50,7 +50,7 @@ class Experto extends Usuario {
         if (problema.estaConfirmado()) {
             throw new Exception("El problema ya fue confirmado")
         }
-        Cotizacion cotizacion = new Cotizacion(costo: new Dinero(monto: costo), experto: this, problema: problema)
+        Cotizacion cotizacion = new Cotizacion(costo: costo, experto: this, problema: problema)
         problema.agregarCotizacion(cotizacion)
         cotizaciones << cotizacion
         cotizacion

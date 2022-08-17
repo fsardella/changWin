@@ -1,5 +1,8 @@
 package changwin
 
+import grails.gorm.transactions.Transactional
+
+@Transactional
 class CotizacionController {
     CotizacionService cotizacionService
 
@@ -16,7 +19,7 @@ class CotizacionController {
     }
     
     def aceptar() {
-        cotizacionService.aceptarCotizacion(params.id.toInteger(), servletContext, params)
+        cotizacionService.aceptarCotizacionDeExperto(params.id.toInteger(), servletContext, params)
         redirect Cotizacion.get(params.id.toInteger())
     }
 }

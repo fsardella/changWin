@@ -1,5 +1,8 @@
 package changwin
 
+import grails.gorm.transactions.Transactional
+
+@Transactional
 class CertificadoController {
     CertificadoService certificadoService
 

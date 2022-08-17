@@ -1,5 +1,8 @@
 package changwin
 
+import grails.gorm.transactions.Transactional
+
+@Transactional
 class ExpertoController {
     ExpertoService expertoService
 
@@ -31,5 +34,10 @@ class ExpertoController {
     def mostrarCotizaciones() {
         Set<Cotizacion> response = expertoService.obtenerCotizacionesDeExperto(params.id.toInteger())
         respond (response, model:[cotizacionesDeExperto: response, cantCotizacionesUsuario: response.size(), maxCotizacionesPerPage: 25])
+    }
+
+    def mostrarProblemas() {
+        Set<Problema> response = expertoService.obtenerProblemasDeExperto(params.id.toInteger())
+        respond (response, model:[problemasDeExperto: response, cantProblemasUsuario: response.size(), maxProblemasPerPage: 25])
     }
 }

@@ -87,6 +87,7 @@ class Problema {
             throw new Exception("Una cotizacion ya fue aceptada")
         }
         this.estado = EstadoProblema.CONFIRMADO
+        this.cotizaciones.forEach{cot -> cot.rechazar()}
         cotizacion.aceptar(fechaDeReunion)
     }
     
@@ -98,8 +99,8 @@ class Problema {
         return this.estado == EstadoProblema.CONFIRMADO
     }
 
-    def getCalificacion() {
-        return getCotizacionAceptada().getCalificacion()
+    def conseguirCalificacion() {
+        return getCotizacionAceptada().conseguirCalificacion()
     }
 
     def eliminarCotizacion(Cotizacion cotizacion) {

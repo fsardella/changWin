@@ -196,7 +196,7 @@ class NecesitadoSpec extends Specification implements DomainUnitTest<Necesitado>
         Integer calificacion = 10
         necesitado.calificar(problema, calificacion)
         expect:
-            problema.getCalificacion() == 10
+            problema.conseguirCalificacion() == 10
     }
 
     void "No se pueden calificar problemas fuera del limite temporal"() {

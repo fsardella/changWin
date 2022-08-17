@@ -22,10 +22,15 @@ class ExpertoService {
     }
 
     def obtenerCotizacionesDeExperto(int expertoId) {
-        print "El experto ${Experto.get(expertoId)} tiene las cotizaciones: "
-        println Experto.get(expertoId).cotizaciones
         def cotizaciones = Experto.get(expertoId).cotizaciones
         return cotizaciones
+    }
+
+    def obtenerProblemasDeExperto(int expertoId) {
+        def expertoActual = Experto.get(expertoId)
+        def problemas = Problema.all.findAll{prob -> expertoActual.certificados.any{cert -> prob.rubro.nombre == cert.rubro.nombre && cert.esValido()}}
+        println "problemas son ${problemas}"
+        return problemas
     }
 }
 

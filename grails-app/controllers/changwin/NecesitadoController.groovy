@@ -1,5 +1,8 @@
 package changwin
 
+import grails.gorm.transactions.Transactional
+
+@Transactional
 class NecesitadoController {
 
     NecesitadoService necesitadoService

@@ -11,17 +11,13 @@ public enum EstadoCotizacion {
 }
 
 class Cotizacion {
-    Dinero costo
+    BigDecimal costo
     Experto experto
     Problema problema
     EstadoCotizacion estado = EstadoCotizacion.EN_ESPERA
     LocalDateTime horaDeReunion
     private Integer calificacion = null
     private Chat chat = new Chat(cotizacion: this)
-    
-    static embedded = [
-        'costo'
-    ]
 
     static belongsTo = [
         experto: Experto,
@@ -29,15 +25,21 @@ class Cotizacion {
     ]
 
     static constraints = {
-        costo blank: false, nullable: false
+        costo blank: false, nullable: true
         experto blank: false, nullable: false
         problema blank: false, nullable: false
         horaDeReunion nullable: true
+        calificacion nullable: true
+        chat nullable: true
     }
 
     def aceptar(LocalDateTime horaReunion) {
-        this.horaDeReunion = horaReunion
-        this.estado = EstadoCotizacion.CONFIRMADA
+        this.setHoraDeReunion(horaReunion)
+        this.setEstado(EstadoCotizacion.CONFIRMADA)
+    }
+
+    def rechazar() {
+        this.setEstado(EstadoCotizacion.RECHAZADA)
     }
 
     def calificar(Integer calificacion) {
@@ -49,7 +51,7 @@ class Cotizacion {
         this.calificacion = calificacion
     }
     
-    def getCalificacion() {
+    def conseguirCalificacion() {
         if (!this.estaCalificada()) {
             throw new Exception("No ha sido calificada")
         }
@@ -82,6 +84,6 @@ class Cotizacion {
     }
     
     String toString() {
-        return "Cotizacion: ${costo}"
+        return 'Cotizacion: $' << costo.setScale(2)
     }
 }

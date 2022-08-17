@@ -33,7 +33,7 @@
                     <g:form resource="${this.cotizacion}" method="POST">
                         <fieldset class="form">
                             <f:with bean="cotizacion">
-                                <f:field property="costo.monto"/>
+                                <f:field property="costo"/>
                             </f:with>
                         </fieldset>
                         <fieldset class="buttons">
