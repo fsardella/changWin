@@ -34,7 +34,7 @@
                     <fieldset class="buttons">
                         <button onclick="location.href='../../certificado/create';">Agregar rubro</button>
                         <button onclick="location.href='../../problema/';">Buscar problemas</button>
-                        <button onclick="location.href='../../experto/mostrarCotizaciones';">Mostrar cotizaciones</button>
+                        <button onclick="location.href='../../experto/mostrarCotizaciones/${this.experto.id}';">Mostrar cotizaciones</button>
                         <button onclick="location.href='../logout';">Cerrar sesión</button>
                     </fieldset>
                 </div>

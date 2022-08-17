@@ -15,4 +15,8 @@ class CotizacionController {
         redirect servletContext["usuarioActual"]
     }
     
+    def aceptar() {
+        cotizacionService.aceptarCotizacion(params.id.toInteger(), servletContext, params)
+        redirect Cotizacion.get(params.id.toInteger())
+    }
 }

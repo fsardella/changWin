@@ -27,4 +27,9 @@ class ExpertoController {
         servletContext.removeAttribute("usuarioActual")
         redirect uri:"/"
     }
+
+    def mostrarCotizaciones() {
+        Set<Cotizacion> response = expertoService.obtenerCotizacionesDeExperto(params.id.toInteger())
+        respond (response, model:[cotizacionesDeExperto: response, cantCotizacionesUsuario: response.size(), maxCotizacionesPerPage: 25])
+    }
 }

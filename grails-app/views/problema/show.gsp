@@ -36,6 +36,11 @@
                             <button onclick="location.href='../../cotizacion/create/${this.problema.id}';">Cotizar</button>
                         </fieldset>
                     </g:if>
+                    <g:if test="${application.usuarioActual != null && application.usuarioActual instanceof changwin.Necesitado}">
+                        <fieldset class="buttons">
+                            <button onclick="location.href='../../problema/mostrarCotizacionesDeProblema/${this.problema.id}';">Mostrar cotizaciones</button>
+                        </fieldset>
+                    </g:if>
                 </div>
             </section>
         </div>

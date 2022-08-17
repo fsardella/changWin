@@ -3,6 +3,13 @@ package changwin
 import java.time.Duration
 import java.time.LocalDateTime
 
+public enum EstadoCotizacion {
+    EN_ESPERA,
+    CONFIRMADA,
+    RECHAZADA,
+    ELIMINADA
+}
+
 class Cotizacion {
     Dinero costo
     Experto experto
@@ -20,18 +27,12 @@ class Cotizacion {
         experto: Experto,
         problema: Problema
     ]
-    
-    public enum EstadoCotizacion {
-        EN_ESPERA,
-        CONFIRMADA,
-        RECHAZADA,
-        ELIMINADA
-    }
 
     static constraints = {
         costo blank: false, nullable: false
         experto blank: false, nullable: false
         problema blank: false, nullable: false
+        horaDeReunion nullable: true
     }
 
     def aceptar(LocalDateTime horaReunion) {

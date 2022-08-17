@@ -20,5 +20,12 @@ class ExpertoService {
         }
         expertoLogInfo.errors.reject('contraseniaInvalida', 'Login inválido')
     }
+
+    def obtenerCotizacionesDeExperto(int expertoId) {
+        print "El experto ${Experto.get(expertoId)} tiene las cotizaciones: "
+        println Experto.get(expertoId).cotizaciones
+        def cotizaciones = Experto.get(expertoId).cotizaciones
+        return cotizaciones
+    }
 }
 

@@ -10,4 +10,9 @@ class ProblemaController {
         problemaService.save(problema, servletContext)
         redirect servletContext["usuarioActual"]
     }
+
+    def mostrarCotizacionesDeProblema() {
+        Set<Cotizacion> response = problemaService.obtenerCotizacionesDeProblema(params.id.toInteger())
+        respond (response, model:[cotizacionesDeProblema: response, cantCotizacionesProblema: response.size(), maxCotizacionesPerPage: 25])
+    }
 }

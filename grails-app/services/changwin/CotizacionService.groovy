@@ -1,6 +1,7 @@
 package changwin
 
 import grails.gorm.transactions.Transactional
+import java.time.LocalDateTime
 
 @Transactional
 class CotizacionService {
@@ -12,5 +13,14 @@ class CotizacionService {
                                                        costoFinal)
         println cotizacion
         cotizacion.save()
+    }
+
+    def aceptarCotizacion(int cotizacionId, def servletContext, def params) {
+        def necesitadoActual = Necesitado.get(servletContext["usuarioActual"].id)
+        def cotizacion = Cotizacion.get(cotizacionId)
+        necesitadoActual.aceptarCotizacion(cotizacion.problema, cotizacion, LocalDateTime.now())
+        println "la cotizacion del estado es ${cotizacion.estado}"
+        cotizacion.save()
+        necesitadoActual.save()
     }
 }

@@ -15,4 +15,11 @@ class ProblemaService {
                                                       problemaCreado.emergencia)
         problema.save()
     }
+
+    def obtenerCotizacionesDeProblema(int problemaId) {
+        print "El problema ${Problema.get(problemaId)} tiene las cotizaciones: "
+        println Problema.get(problemaId).cotizaciones
+        def cotizaciones = Problema.get(problemaId).cotizaciones
+        return cotizaciones
+    }
 }

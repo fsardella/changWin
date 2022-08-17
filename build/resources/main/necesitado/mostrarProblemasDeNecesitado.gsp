@@ -24,9 +24,6 @@
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <f:table collection="${problemasDeUsuario}" />
-                    <g:if test="${cantProblemasUsuario == 0}">
-                        <div class="message" role="status">NO HAY ELEMENTOS. ACA ALGO ANDA MAL</div>
-                    </g:if>
                     <g:if test="${cantProblemasUsuario > maxProblemasPerPage}">
                     <div class="pagination">
                         <g:paginate total="${cantProblemasUsuario ?: 0}" />
