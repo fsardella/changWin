@@ -9,17 +9,17 @@ class CotizacionController {
     static scaffold = Cotizacion
 
     def create() {
-        servletContext["problemaForLastCreatedCotizacion"] = Problema.get(params.id)
+        session["problemaForLastCreatedCotizacion"] = Problema.get(params.id)
         respond new Cotizacion(params)
     }
     
     def save(Cotizacion cotizacion) {
-        cotizacionService.save(cotizacion, servletContext, params)
-        redirect servletContext["usuarioActual"]
+        cotizacionService.save(cotizacion, session, params)
+        redirect session["usuarioActual"]
     }
     
     def aceptar() {
-        cotizacionService.aceptarCotizacionDeExperto(params.id.toInteger(), servletContext, params)
+        cotizacionService.aceptarCotizacionDeExperto(params.id.toInteger(), session, params)
         redirect Cotizacion.get(params.id.toInteger())
     }
 }

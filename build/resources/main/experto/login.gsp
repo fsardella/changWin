@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <g:if test="${application.usuarioActual != null}">
+        <g:if test="${session.usuarioActual != null}">
             <meta http-equiv="Refresh" content="0; url='http://localhost:8080'" />
         </g:if>
         <meta name="layout" content="main" />
@@ -22,7 +22,7 @@
             </section>
             <section class="row">
                 <div id="create-experto" class="col-12 content scaffold-create" role="main">
-                    <h1><g:message code="Login" args="[entityName]" /></h1>
+                    <h1><g:message code="Login como {0}" args="[entityName]" /></h1>
                     <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>

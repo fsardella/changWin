@@ -10,7 +10,7 @@ class NecesitadoController {
     static scaffold = Necesitado
 
     def save(Necesitado necesitado) {
-        necesitadoService.save(necesitado, servletContext)
+        necesitadoService.save(necesitado, session)
         redirect necesitado
     }
 
@@ -24,9 +24,9 @@ class NecesitadoController {
     }
 
     def loginConfirmed(Necesitado necesitado) {
-        if (servletContext["usuarioActual"]) {return}
+        if (session["usuarioActual"]) {return}
         try {
-            redirect necesitadoService.logNecesitado(necesitado, servletContext)
+            redirect necesitadoService.logNecesitado(necesitado, session)
         } catch (Exception e) {
             respond necesitado.errors, view:'login'
         }
@@ -34,7 +34,7 @@ class NecesitadoController {
     }
 
     def logout() {
-        servletContext.removeAttribute("usuarioActual")
+        session.invalidate()
         redirect uri:"/"
     }
 

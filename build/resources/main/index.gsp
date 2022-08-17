@@ -3,12 +3,12 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Chang-Win</title>
-    <g:if test="${application.usuarioActual != null}">
-        <g:if test="${application.usuarioActual instanceof changwin.Necesitado}">
-            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${application.usuarioActual.id}'" />
+    <g:if test="${session.usuarioActual != null}">
+        <g:if test="${session.usuarioActual instanceof changwin.Necesitado}">
+            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${session.usuarioActual.id}'" />
         </g:if>
         <g:else>
-            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/experto/show/${application.usuarioActual.id}'" />
+            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/experto/show/${session.usuarioActual.id}'" />
         </g:else>
     </g:if>
 </head>

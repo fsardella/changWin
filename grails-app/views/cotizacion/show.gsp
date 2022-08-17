@@ -31,7 +31,7 @@
                             <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                         </fieldset>
                     </g:form>
-                    <g:if test="${application.usuarioActual != null && application.usuarioActual instanceof changwin.Necesitado && this.cotizacion.estado == changwin.EstadoCotizacion.EN_ESPERA}">
+                    <g:if test="${session.usuarioActual != null && session.usuarioActual instanceof changwin.Necesitado && this.cotizacion.estado == changwin.EstadoCotizacion.EN_ESPERA}">
                         <fieldset class="buttons">
                             <button onclick="location.href='../../cotizacion/aceptar/${this.cotizacion.id}';">Aceptar cotización</button>
                         </fieldset>

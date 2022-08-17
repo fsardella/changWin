@@ -9,7 +9,7 @@ class ExpertoController {
     static scaffold = Experto
 
     def save(Experto experto) {
-        expertoService.save(experto, servletContext)
+        expertoService.save(experto, session)
         redirect experto
     }
 
@@ -18,16 +18,16 @@ class ExpertoController {
     }
 
     def loginConfirmed(Experto experto) {
-        if (servletContext["usuarioActual"]) {return}
+        if (session["usuarioActual"]) {return}
         try {
-            redirect expertoService.logExperto(experto, servletContext)
+            redirect expertoService.logExperto(experto, session)
         } catch (Exception e) {
             respond experto.errors, view:'login'
         }
     }
 
     def logout() {
-        servletContext.removeAttribute("usuarioActual")
+        session.invalidate()
         redirect uri:"/"
     }
 

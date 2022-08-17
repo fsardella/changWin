@@ -4,10 +4,10 @@ import grails.gorm.transactions.Transactional
 
 @Transactional
 class NecesitadoService {
-    def save(Necesitado necesitadoCreado, def servletContext) {
+    def save(Necesitado necesitadoCreado, def session) {
         def necesitado = necesitadoCreado
         necesitado.save()
-        servletContext["usuarioActual"] = necesitado
+        session["usuarioActual"] = necesitado
     }
 
     def obtenerProblemasDeNecesitado(int necesitadoId) {
@@ -17,10 +17,10 @@ class NecesitadoService {
         return problemas
     }
 
-    def logNecesitado(Necesitado necesitadoLogInfo, def servletContext) {
+    def logNecesitado(Necesitado necesitadoLogInfo, def session) {
         def necesitado = Necesitado.findByNombre(necesitadoLogInfo.nombre)
         if (necesitado && necesitado.contrasenia == necesitadoLogInfo.contrasenia) {
-            servletContext["usuarioActual"] = necesitado
+            session["usuarioActual"] = necesitado
             return necesitado
         }
         necesitadoLogInfo.errors.reject('contraseniaInvalida', 'Login inválido')

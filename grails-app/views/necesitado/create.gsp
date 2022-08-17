@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <g:if test="${application.usuarioActual != null}">
+        <g:if test="${session.usuarioActual != null}">
             <meta http-equiv="Refresh" content="0; url='http://localhost:8080'" />
         </g:if>
         <meta name="layout" content="main" />
