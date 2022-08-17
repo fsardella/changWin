@@ -37,8 +37,8 @@
                                 <f:field property="numeroMatricula"/>
                                 <f:field property="rubro"/>
                             </f:with>
-                            <g:datePicker name="fechaEmision" value="${new LocalDateTime()}"/>
-                            <g:datePicker name="fechaVencimiento"  value="${new LocalDateTime()}"/>
+                            <g:datePicker name="fechaEmision" value="${LocalDateTime.now()}"/>
+                            <g:datePicker name="fechaVencimiento"  value="${LocalDateTime.now()}"/>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
