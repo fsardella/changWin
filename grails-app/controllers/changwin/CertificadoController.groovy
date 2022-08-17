@@ -6,7 +6,7 @@ class CertificadoController {
     static scaffold = Certificado
 
     def save(Certificado certificado) {
-        certificadoService.save(certificado, servletContext)
+        certificadoService.save(certificado, servletContext, params)
         redirect servletContext["usuarioActual"]
     }
 

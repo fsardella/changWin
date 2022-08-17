@@ -50,9 +50,7 @@ class Experto extends Usuario {
         if (problema.estaConfirmado()) {
             throw new Exception("El problema ya fue confirmado")
         }
-        println "La cantidad de dinero que entra es ${costo}"
         Cotizacion cotizacion = new Cotizacion(costo: new Dinero(monto:costo), experto: this, problema: problema)
-        println "tiene el dinero ${cotizacion.costo}"
         problema.agregarCotizacion(cotizacion)
         cotizaciones << cotizacion
         cotizacion

@@ -6,6 +6,7 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+    <%@ page import="java.time.LocalDateTime" %>
     <div id="content" role="main">
         <div class="container">
             <section class="row">
@@ -34,10 +35,10 @@
                         <fieldset class="form">
                             <f:with bean="certificado">
                                 <f:field property="numeroMatricula"/>
-                                <f:field type="datetime-local" property="fechaEmision"/>
-                                <f:field type="datetime-local" property="fechaVencimiento"/>
                                 <f:field property="rubro"/>
                             </f:with>
+                            <g:datePicker name="fechaEmision" value="${new LocalDateTime()}"/>
+                            <g:datePicker name="fechaVencimiento"  value="${new LocalDateTime()}"/>
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
