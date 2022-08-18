@@ -11,8 +11,6 @@ class NecesitadoService {
     }
 
     def obtenerProblemasDeNecesitado(int necesitadoId) {
-        print "El necesitado ${Necesitado.get(necesitadoId)} tiene los problemas: "
-        println Necesitado.get(necesitadoId).problemas
         def problemas = Necesitado.get(necesitadoId).problemas
         return problemas
     }

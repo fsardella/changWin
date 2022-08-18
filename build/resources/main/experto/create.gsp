@@ -6,6 +6,13 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+    <%-- <div class="container-de-imagen"></div>
+    <div class="imagen-contenida">
+        <asset:image src="expertoRegister.jpg" class="grails-logo"/>
+    </div> --%>
+    <div class="grails-logo-container">
+        <asset:image src="changWin.png" class="grails-logo"/>
+    </div>
     <div id="content" role="main">
         <div class="container">
             <section class="row">

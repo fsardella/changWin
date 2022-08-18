@@ -58,8 +58,8 @@
   background-image: url(../images/todos.jpg);
 
   /* Add the blur effect */
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
+  filter: blur(1px);
+  -webkit-filter: blur(3px);
 
   /* Full height */
   height: 100%;
@@ -73,21 +73,17 @@
 /*
   background-size: cover;
 */
-
 }
 
 /* Position text in the middle of the page/image */
 .imagen-contenida {
-  margin-bottom: 20px;
-  color: white;
-  height:300px;
-  text-align:center;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: -359px;
+  margin-left: 485px;
   z-index: 2;
-  width: 80%;
+  height: 40%;
+  width: 22%;
   padding: 20px;
   text-align: center;
+  filter: blur(0.5px);
+  -webkit-filter: blur(0.5px);
 }

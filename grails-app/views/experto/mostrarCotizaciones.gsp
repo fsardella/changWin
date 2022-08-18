@@ -6,6 +6,8 @@
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
+    <div class="grails-logo-container-v2"></div>
+    <asset:image src="lista.png" class="imagen-contenida"/>
     <div id="content" role="main">
         <div class="container">
             <section class="row">

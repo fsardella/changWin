@@ -6,6 +6,9 @@
         <title><g:message code="Login" args="[entityName]" /></title>
     </head>
     <body>
+    <%-- <div class="grails-logo-container-experto-login"></div> --%>
+    <div class="grails-logo-container-v2"></div>
+    <asset:image src="tuerca.png" class="imagen-contenida"/>
     <div id="content" role="main">
         <div class="container">
             <section class="row">
@@ -13,7 +16,6 @@
                 <div class="nav" role="navigation">
                     <ul>
                         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
                     </ul>
                 </div>
             </section>

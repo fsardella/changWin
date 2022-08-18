@@ -584,6 +584,18 @@ a.skip {
     text-align:center;
 }
 
+.grails-logo-container-v2 {
+    /* background: #7c7c7c no-repeat 50% 30%; */
+    background-image: url(../images/todos.jpg);
+    margin-bottom: 20px;
+    color: white;
+    height:300px;
+    text-align:center;
+
+    filter:blur(2px);
+    -webkit-filter:blur(2px);
+}
+
 img.grails-logo {
     height:340px;
     margin-top:-10px;

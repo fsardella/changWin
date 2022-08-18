@@ -6,6 +6,9 @@
         <title><g:message code="Registrarse como {0}" args="[entityName]" /></title>
     </head>
     <body>
+    <%-- <div class="grails-logo-container-necesitado-register"></div> --%>
+    <div class="grails-logo-container-v2"></div>
+    <asset:image src="peoples.png" class="imagen-contenida"/>
     <div id="content" role="main">
         <div class="container">
             <section class="row">

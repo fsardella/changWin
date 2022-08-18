@@ -6,6 +6,8 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
+    <div class="grails-logo-container-v2"></div>
+    <asset:image src="confirmar_cotizacion.png" class="imagen-contenida"/>
     <%@ page import="java.time.LocalDateTime" %>
     <div id="content" role="main">
         <div class="container">

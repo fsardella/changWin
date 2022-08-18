@@ -42,8 +42,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <strong class="centered"><target="_blank">Copyright</a></strong>
-                <p>Cris y Flor Entertainment. Realizado con el software Grails.</p>
+                <strong class="centered"><target="_blank">Cris&Flor Entertainment©</a></strong>
+                <p>Realizado con el software Grails.</p>
             </div>
         </div>
     </div>
