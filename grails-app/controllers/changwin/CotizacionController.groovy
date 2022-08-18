@@ -9,17 +9,20 @@ class CotizacionController {
     static scaffold = Cotizacion
 
     def create() {
-        session["problemaForLastCreatedCotizacion"] = Problema.get(params.id)
         respond new Cotizacion(params)
     }
     
     def save(Cotizacion cotizacion) {
-        cotizacionService.save(cotizacion, session, params)
-        redirect session["usuarioActual"]
+        try {
+            cotizacionService.save(cotizacion, session, params)
+            redirect session["usuarioActual"]
+        } catch (Exception e) {
+            respond cotizacion.errors, view:'create'
+        }
+
     }
 
     def aceptarCotizacion() {
-        session["problemaForLastCreatedCotizacion"] = params.fechaDeReunion
     }
     
     def aceptar() {

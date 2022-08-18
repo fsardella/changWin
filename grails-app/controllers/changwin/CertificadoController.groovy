@@ -9,8 +9,12 @@ class CertificadoController {
     static scaffold = Certificado
 
     def save(Certificado certificado) {
-        certificadoService.save(certificado, session, params)
-        redirect session["usuarioActual"]
+        try {
+            certificadoService.save(certificado, session, params)
+            redirect session["usuarioActual"]
+        } catch (Exception e) {
+            respond certificado.errors, view:'create'
+        }
     }
 
 }

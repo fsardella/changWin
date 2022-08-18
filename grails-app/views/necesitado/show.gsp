@@ -18,11 +18,13 @@
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <f:display bean="necesitado" except="contrasenia, problemas"/>
-                    <fieldset class="buttons">
-                        <button onclick="location.href='../../necesitado/mostrarProblemasDeNecesitado/${this.necesitado.id}';">Mostrar problemas</button>
-                        <button onclick="location.href='../../problema/create';">Crear problema</button>
-                        <button onclick="location.href='../logout';">Cerrar sesión</button>
-                    </fieldset>
+                    <g:if test="${session.usuarioActual != null && params.id.toInteger() == session.usuarioActual.id}">
+                        <fieldset class="buttons">
+                            <button onclick="location.href='../../necesitado/mostrarProblemasDeNecesitado/${this.necesitado.id}';">Mostrar problemas</button>
+                            <button onclick="location.href='../../problema/create';">Crear problema</button>
+                            <button onclick="location.href='../logout';">Cerrar sesión</button>
+                        </fieldset>
+                    </g:if>
                 </div>
             </section>
         </div>

@@ -9,8 +9,13 @@ class ExpertoController {
     static scaffold = Experto
 
     def save(Experto experto) {
-        expertoService.save(experto, session)
-        redirect experto
+        try {
+            expertoService.save(experto, session)
+            redirect experto
+        } catch (Exception e) {
+            session["usuarioActual"] = null
+            respond experto.errors, view:'create'
+        }
     }
 
     def login() {

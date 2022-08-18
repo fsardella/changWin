@@ -29,7 +29,7 @@
                         </g:eachError>
                     </ul>
                     </g:hasErrors>
-                    <g:form resource="${this.cotizacion}" method="POST">
+                    <g:form resource="${this.cotizacion}" method="POST" params="[idProblema: params.id]">
                         <fieldset class="form">
                             <f:with bean="cotizacion">
                                 <f:field property="costo"/>

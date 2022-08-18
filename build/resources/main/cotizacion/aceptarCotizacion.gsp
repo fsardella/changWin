@@ -30,7 +30,7 @@
                         </g:eachError>
                     </ul>
                     </g:hasErrors>
-                    <g:form resource="${this.cotizacion}" method="POST">
+                    <g:form resource="${this.cotizacion}" method="POST" controller="cotizacion" action="aceptar" params="[id: params.id]">
                         <fieldset class="form">
                             <div class="fecha-field">
                                 <br/>
@@ -39,7 +39,7 @@
                             </div>
                         </fieldset>
                         <fieldset class="buttons">
-                            <g:submitButton name="aceptar" class="aceptar" value="aceptar" />
+                            <g:submitButton name="aceptar" class="aceptar" value="Aceptar"/>
                         </fieldset>
                     </g:form>
                 </div>

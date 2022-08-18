@@ -22,7 +22,7 @@
                     <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
-                    <f:display bean="problema" />
+                    <f:display bean="problema" except="cotizaciones"/>
                     <g:if test="${session.usuarioActual != null && session.usuarioActual instanceof changwin.Experto && !changwin.Problema.get(params.id).estaConfirmado()}">
                         <fieldset class="buttons">
                             <button onclick="location.href='../../cotizacion/create/${this.problema.id}';">Cotizar</button>

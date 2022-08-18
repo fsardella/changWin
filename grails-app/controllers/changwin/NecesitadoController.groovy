@@ -2,7 +2,6 @@ package changwin
 
 import grails.gorm.transactions.Transactional
 
-@Transactional
 class NecesitadoController {
 
     NecesitadoService necesitadoService
@@ -10,8 +9,13 @@ class NecesitadoController {
     static scaffold = Necesitado
 
     def save(Necesitado necesitado) {
-        necesitadoService.save(necesitado, session)
-        redirect necesitado
+        try {
+            necesitadoService.save(necesitado, session)
+            redirect necesitado
+        } catch (Exception e) {
+            session["usuarioActual"] = null
+            respond necesitado.errors, view:'create'
+        }
     }
 
     def mostrarProblemasDeNecesitado() {

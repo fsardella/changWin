@@ -8,7 +8,7 @@ class CotizacionService {
     def save(Cotizacion cotizacionCreada, def session, def params) {
         def expertoActual = Experto.get(session["usuarioActual"].id)
         BigDecimal costoFinal = new BigDecimal(params.costo)
-        def cotizacion = expertoActual.cotizarProblema(Problema.get(session["problemaForLastCreatedCotizacion"].id),
+        def cotizacion = expertoActual.cotizarProblema(Problema.get(params.idProblema),
                                                        costoFinal)
         cotizacion.save()
     }

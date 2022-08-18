@@ -18,13 +18,15 @@
                     <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <f:display bean="experto" except="contrasenia, cotizaciones, certificados"/>
-                    <fieldset class="buttons">
-                        <button onclick="location.href='../../certificado/create';">Agregar rubro</button>
-                        <button onclick="location.href='../../experto/mostrarProblemas/${this.experto.id}';">Buscar problemas</button>
-                        <button onclick="location.href='../../experto/mostrarCotizaciones/${this.experto.id}';">Mostrar cotizaciones</button>
-                        <button onclick="location.href='../../experto/mostrarCertificados/${this.experto.id}';">Mostrar certificados</button>
-                        <button onclick="location.href='../logout';">Cerrar sesión</button>
-                    </fieldset>
+                    <g:if test="${session.usuarioActual != null && params.id.toInteger() == session.usuarioActual.id}">
+                        <fieldset class="buttons">
+                            <button onclick="location.href='../../certificado/create';">Agregar rubro</button>
+                            <button onclick="location.href='../../experto/mostrarProblemas/${this.experto.id}';">Buscar problemas</button>
+                            <button onclick="location.href='../../experto/mostrarCotizaciones/${this.experto.id}';">Mostrar cotizaciones</button>
+                            <button onclick="location.href='../../experto/mostrarCertificados/${this.experto.id}';">Mostrar certificados</button>
+                            <button onclick="location.href='../logout';">Cerrar sesión</button>
+                        </fieldset>
+                    </g:if>
                 </div>
             </section>
         </div>

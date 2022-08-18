@@ -10,8 +10,12 @@ class ProblemaController {
     static scaffold = Problema
 
     def save(Problema problema) {
-        problemaService.save(problema, session)
-        redirect session["usuarioActual"]
+        try {
+            problemaService.save(problema, session)
+            redirect session["usuarioActual"]
+        } catch (Exception e) {
+            respond problema.errors, view:'create'
+        }
     }
 
     def mostrarCotizacionesDeProblema() {
