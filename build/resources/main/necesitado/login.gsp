@@ -6,6 +6,9 @@
         <title><g:message code="Login" args="[entityName]" /></title>
     </head>
     <body>
+    <%-- <div class="grails-logo-container-necesitado-login"></div> --%>
+    <div class="grails-logo-container-v2"></div>
+    <asset:image src="two_people.png" class="imagen-contenida"/>
     <div id="content" role="main">
         <div class="container">
             <section class="row">
