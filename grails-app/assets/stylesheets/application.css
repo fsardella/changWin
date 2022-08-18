@@ -43,3 +43,51 @@
   text-align: right;
   margin-right: 45.5%;
 }
+
+/*
+.container-de-imagen {
+    margin-bottom: 20px;
+    color: white;
+    height:300px;
+    text-align:center;
+}
+*/
+
+.container-de-imagen {
+  /* The image used */
+  background-image: url(../images/todos.jpg);
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  position: absolute
+/*
+  background-repeat: no-repeat;
+*/
+/*
+  background-size: cover;
+*/
+
+}
+
+/* Position text in the middle of the page/image */
+.imagen-contenida {
+  margin-bottom: 20px;
+  color: white;
+  height:300px;
+  text-align:center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}

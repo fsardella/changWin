@@ -3,14 +3,6 @@
 <head>
     <meta name="layout" content="main"/>
     <title>Chang-Win</title>
-    <g:if test="${session.usuarioActual != null}">
-        <g:if test="${session.usuarioActual instanceof changwin.Necesitado}">
-            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/necesitado/show/${session.usuarioActual.id}'" />
-        </g:if>
-        <g:else>
-            <meta http-equiv="Refresh" content="0; url='http://localhost:8080/experto/show/${session.usuarioActual.id}'" />
-        </g:else>
-    </g:if>
 </head>
 <body>
 
@@ -26,18 +18,17 @@
             <h1>Bienvenido/a a Chang-win</h1>
 
             <p>
-                Conseguir un electricista, plomero o realmente cualquier experto de confianza es 
-                un problema muy común y difícil de resolver en la vida del ser humano moderno, con 
-                tanta escasez de tiempo. Más aún si se considera que debe estar disponible en las franjas 
-                horarias donde podemos recibirlo; y que, aún teniendo certificaciones verificables, no 
-                existe información centralizada sobre la eficiencia con la que realizará su labor.
+                Conseguir un electricista, plomero o realmente cualquier experto de confianza
+                es un problema muy común y difícil de resolver en la vida del ser humano moderno,
+                con tanta escasez de tiempo. Más aún si se considera que debe estar disponible en
+                las franjas horarias donde podemos recibirlo; y que, aún teniendo certificaciones
+                verificables, no existe información centralizada sobre la eficiencia con la que realizará su trabajo.
             </p>
             <p>
-                Chang-win es una alternativa al boca-boca al cual estamos acostumbrados para la resolución 
-                de dichos “laburos” en diferentes rubros (como pueden ser la plomería, electricidad o limpieza). 
-                Es un servicio que se encarga de llevar la eficiencia del mundo moderno a las problemáticas 
-                típicas que pueden surgir por defectos cotidianos en busca de arreglo.
-
+                Chang-win es una alternativa al boca-boca al cual estamos acostumbrados para
+                la resolución de dichos “problemas” en diferentes rubros (como pueden ser la plomería,
+                electricidad o pintura). Es un servicio que se encarga de llevar la eficiencia del mundo
+                moderno a las problemáticas típicas que pueden surgir por defectos cotidianos en busca de arreglo.
             </p>
 
         </section>

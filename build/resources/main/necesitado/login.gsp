@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <g:if test="${session.usuarioActual != null}">
-            <meta http-equiv="Refresh" content="0; url='http://localhost:8080'" />
-        </g:if>
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'necesitado.label', default: 'Necesitado')}" />
         <title><g:message code="Login" args="[entityName]" /></title>
